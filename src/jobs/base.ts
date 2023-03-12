@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import chalk from 'chalk';
+import ansiRegex from 'ansi-regex';
 import { replaceEnvVariables } from '../utils/replaceEnvVariables.js';
 
 export interface IConfigBase {
@@ -15,7 +16,7 @@ export interface IConfigBase {
 	uses: string;
 	pipeline: {
 		env: {
-			[key: string]: string;
+			[key: string]: any;
 		}
 	}
 }
@@ -56,11 +57,11 @@ export abstract class Base {
 			let stdout = '';
 			let stderr = '';
 			process.stdout.on('data', (data) => {
-				console.log(data);
+				console.log(chalk.reset(data));
 				stdout += data;
 			});
 			process.stderr.on('data', (data) => {
-				console.log(chalk.red(data));
+				console.log(chalk.reset(data));
 				stderr += data;
 			});
 			process.on('close', (code) => {

@@ -16,7 +16,10 @@ export class Script extends Base {
 		const scripts = Array.isArray(this.script) ? this.script : [this.script];
 
 		for (const script of scripts) {
-			const result = await this.execScript(script);
+			const result = await this.execScript(script).catch(() => {
+				process.exit(1);
+			});
+
 			if (result.code !== 0) {
 				throw new Error(result.stderr);
 			}
