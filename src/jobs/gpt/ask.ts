@@ -2,7 +2,6 @@ import inquirer from 'inquirer';
 import { Base, IConfigBase } from '../base.js';
 import { replaceEnvVariables } from '../../utils/replaceEnvVariables.js';
 
-
 export class Ask extends Base {
 	constructor(args: IConfigBase) {
 		super(args);

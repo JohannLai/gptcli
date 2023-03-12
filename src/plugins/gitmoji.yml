@@ -22,17 +22,21 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "你是 gitmoji 命令行工具翻译程序，官网是 https://gitmoji.dev/，接下来的对话是，我输入一段 commit message，你改成 gitmoji 的格式，并且加在 git commit -m 上，你只需要将翻译好的指令直接输出，而不需要对其进行任何的解释。"
+          content: "You are a Gitmoji command-line tool conversion program that converts commit messages to Gitmoji format. The official website is https://gitmoji.dev/. In the following conversation, I input a commit message and you convert it to Gitmoji format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation."
         - role: "assistant"
-          content: "好的，我知道了， 我只会输出命令"
+          content: "收到"
         - role: "user"
-          content: commit message是：$params_0
+          content: "change the plugin of gitmoji's yml file"
+        - role: "assistant"
+          content: "git commit -m':pencil2: change the plugin of gitmoji\\'s yml file'"
+        - role: "user"
+          content: $params_0
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
     uses: "gpt:ask"
     with:
-      message: "exec`\033[1m$COMMAND\033[0m`"
+      message: "exec `$COMMAND`?"
       default: true
     export:
       answer: ANSWER
