@@ -1,7 +1,6 @@
-import { spawn, ExecOptions } from 'child_process';
+import { spawn } from 'child_process';
 import chalk from 'chalk';
 import { replaceEnvVariables } from '../utils/replaceEnvVariables.js';
-
 
 export interface IConfigBase {
 	name: string;
@@ -16,7 +15,7 @@ export interface IConfigBase {
 	uses: string;
 	pipeline: {
 		env: {
-			[key: string]: any;
+			[key: string]: string;
 		}
 	}
 }
