@@ -32,7 +32,7 @@ steps:
   - name: "ask if user want to execute the command"
     uses: "gpt:ask"
     with:
-      message: "exec `$COMMAND`?"
+      message: "exec`\033[1m$COMMAND\033[0m`"
       default: true
     export:
       answer: ANSWER
