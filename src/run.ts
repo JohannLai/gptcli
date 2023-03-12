@@ -1,13 +1,42 @@
 import { IConfigBase } from "./jobs/base.js";
+import { IPluginConfig } from "./utils/getPluginConfig.js";
+import { replaceEnvVariables } from "./utils/replaceEnvVariables.js";
+import { IArgv } from "./cli.js"
 
-export async function run(pluginConfig: any, optionalSpread: string[]) {
-	const pipeline = {
-		env: pluginConfig.env,
-		config: pluginConfig.config,
+export interface IPipeline {
+	env: {
+		[key: string]: string;
+	};
+	config: IPluginConfig;
+}
+
+export async function run(pluginConfig: IPluginConfig, argv: IArgv) {
+	const { unknownFlags } = argv;
+	const { optionalSpread } = argv._;
+
+	// prepare pipeline
+	const pipeline: IPipeline = {
+		env: {},
+		config: pluginConfig,
 	};
 
-	const { steps } = pluginConfig;
+	// replace plugin env variables
+	Object.keys(pluginConfig.env).forEach((key) => {
+		pipeline.env[key] = replaceEnvVariables(pluginConfig.env[key], {
+			...process.env,
+		});
+	})
 
+	Object.keys(unknownFlags).forEach((flag) => {
+		pipeline.env[`flag_${flag}}`] = String(unknownFlags[flag]);
+	})
+
+	optionalSpread.forEach((value, index) => {
+		process.env[`params_${index}`] = value;
+	})
+
+	// run steps
+	const { steps } = pluginConfig;
 	for (const step of steps) {
 		const { name, with: with_, if: if_, script, export: export_, uses, } = step;
 		if (uses) {

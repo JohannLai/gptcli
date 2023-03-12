@@ -9,10 +9,6 @@ help: |
 
     gpt gitmoji "add gitmoji plugin"
 
-    or
-
-    gpt gitmoji "add gitmoji plugin" --yes
-
 env:
   notion_token: $NOTION_TOKEN
   OPENAI_API_KEY: $OPENAI_API_KEY
@@ -34,7 +30,7 @@ steps:
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
-    uses: "gpt:ask"
+    uses: "gpt:trueFalse"
     with:
       message: "exec `$COMMAND`?"
       default: true

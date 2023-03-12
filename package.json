@@ -3,6 +3,7 @@
 	"version": "0.0.0-semantic-release",
 	"description": "",
 	"scripts": {
+		"preinstall": "touch ~/.gptrc",
 		"watch": "pkgroll --watch",
 		"build": "pkgroll --minify",
 		"lint": "eslint --cache .",
@@ -32,14 +33,17 @@
 	"author": "ZHIHANG LI",
 	"type": "module",
 	"exports": {
-		"./jobs/gpt/ask.js": "./dist/jobs/gpt/ask.js",
+		"./jobs/gpt/trueFalse.js": "./dist/jobs/gpt/trueFalse.js",
 		"./jobs/gpt/createChatCompletion.js": "./dist/jobs/gpt/createChatCompletion.js"
 	},
 	"files": [
 		"dist"
 	],
 	"bin": {
-		"gpt": "./dist/cli.mjs"
+		"gpt": "./dist/cli.mjs",
+		"gptcli": "./dist/cli.mjs",
+		"chatgpt": "./dist/cli.mjs",
+		"gpt-cli": "./dist/cli.mjs"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.54.1",
@@ -62,6 +66,7 @@
 		"axios": "^1.3.4",
 		"chalk": "^5.2.0",
 		"cleye": "^1.3.2",
+		"ini": "^3.0.1",
 		"inquirer": "^9.1.4",
 		"install": "^0.13.0",
 		"js-yaml": "^4.1.0",

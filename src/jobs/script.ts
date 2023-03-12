@@ -1,5 +1,5 @@
 import { Base, IConfigBase } from './base.js';
-import { getOutput } from '../utils/set-output.js';
+import { getOutput } from '../utils/setOutput.js';
 
 export class Script extends Base {
 	constructor(args: IConfigBase) {
