@@ -1,0 +1,42 @@
+name: gitmoji
+description: "gitmoji plugin for gpt cli"
+repository: "johannlai/gptcli"
+author: "johannlai"
+help: |
+  gitmoji plugin for gpt cli
+
+  Usage:
+
+    gpt gitmoji "add gitmoji plugin"
+
+    or
+
+    gpt gitmoji "add gitmoji plugin" --yes
+
+env:
+  notion_token: $NOTION_TOKEN
+  OPENAI_API_KEY: $OPENAI_API_KEY
+steps:
+  - name: "ask ai to output gitmoji"
+    uses: "gpt:createChatCompletion"
+    with:
+      messages:
+        - role: "user"
+          content: "你是 gitmoji 命令行工具翻译程序，官网是 https://gitmoji.dev/，接下来的对话是，我输入一段 commit message，你改成 gitmoji 的格式，并且加在 git commit -m 上，你只需要将翻译好的指令直接输出，而不需要对其进行任何的解释。"
+        - role: "assistant"
+          content: "好的，我知道了， 我只会输出命令"
+        - role: "user"
+          content: commit message是：$params_0
+    export:
+      response_content: COMMAND
+  - name: "ask if user want to execute the command"
+    uses: "gpt:ask"
+    with:
+      message: "exec `$COMMAND`?"
+      default: true
+    export:
+      answer: ANSWER
+  - name: "execute the command"
+    if: $ANSWER == true
+    script: |
+      bash -c "$COMMAND"
