@@ -1,7 +1,7 @@
+import { Renderers } from "cleye";
 import { IConfigBase } from "./jobs/base.js";
 import { IPluginConfig } from "./utils/getPluginConfig.js";
 import { replaceEnvVariables } from "./utils/replaceEnvVariables.js";
-import { IArgv } from "./cli.js"
 
 export interface IPipeline {
 	env: {
@@ -10,7 +10,15 @@ export interface IPipeline {
 	config: IPluginConfig;
 }
 
-export async function run(pluginConfig: IPluginConfig, argv: IArgv) {
+export async function run(pluginConfig: IPluginConfig, argv: {
+	command: undefined; flags: { help: boolean | undefined; }; unknownFlags: { [flagName: string]: (string | boolean)[]; }; _: string[] & { "--": string[]; } & { plugin: string; optionalSpread: string[]; }; showHelp: (options?: {
+		version?: string | undefined; description?: string | undefined; usage?: string | false | string[] | undefined; examples?: string | string[] | undefined; render?: ((nodes: {
+			// prepare pipeline
+			id // prepare pipeline
+			?: string | undefined; type: keyof Renderers; data: any;
+		}[], renderers: Renderers) => string) | undefined;
+	} | undefined) => void; showVersion: () => void;
+}) {
 	const { unknownFlags } = argv;
 	const { optionalSpread } = argv._;
 

@@ -7,16 +7,6 @@ import { readdirSync } from 'fs';
 import path from 'path';
 import { join } from 'path';
 
-export interface IArgv {
-	_: {
-		plugin: string;
-		optionalSpread: string[];
-	};
-	unknownFlags: {
-		[key: string]: string | boolean;
-	};
-}
-
 const argv = cli({
 	name: 'gpt-cli',
 
@@ -45,6 +35,7 @@ const argv = cli({
 
 const { plugin, optionalSpread } = argv._;
 
+// List all plugins
 if (argv._[0] == 'list') {
 	const plugins = readdirSync(join(process.cwd(), 'src/plugins')).map((plugin) => plugin.replace('.yml', ''));
 	console.log(plugins)
@@ -57,6 +48,8 @@ if (argv._[0] == 'list') {
 	process.exit(0);
 }
 
+// Config plugin
+// TODO: can be refactored to a plugin, use plugin/gpt/config.yml
 if (argv._[0] == 'config') {
 	// e.g: optionalSpread: [ 'user.token', '123' ]
 	const isSet = argv._.optionalSpread.length == 2;
@@ -81,6 +74,7 @@ if (argv._[0] == 'config') {
 
 const pluginConfig = getPluginConfig(plugin);
 
+// Print plugin info
 if (optionalSpread[0] == 'info') {
 	const { name, description, repository } = pluginConfig;
 	console.log(`
