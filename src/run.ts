@@ -11,13 +11,7 @@ export interface IPipeline {
 }
 
 export async function run(pluginConfig: IPluginConfig, argv: {
-	command: undefined; flags: { help: boolean | undefined; }; unknownFlags: { [flagName: string]: (string | boolean)[]; }; _: string[] & { "--": string[]; } & { plugin: string; optionalSpread: string[]; }; showHelp: (options?: {
-		version?: string | undefined; description?: string | undefined; usage?: string | false | string[] | undefined; examples?: string | string[] | undefined; render?: ((nodes: {
-			// prepare pipeline
-			id // prepare pipeline
-			?: string | undefined; type: keyof Renderers; data: any;
-		}[], renderers: Renderers) => string) | undefined;
-	} | undefined) => void; showVersion: () => void;
+	command: undefined; flags: { help: boolean | undefined; }; unknownFlags: { [flagName: string]: (string | boolean)[]; }; _: string[] & { "--": string[]; } & { plugin: string; optionalSpread: string[]; }; showHelp: (options?: { version?: string | undefined; description?: string | undefined; usage?: string | false | string[] | undefined; examples?: string | string[] | undefined; render?: ((nodes: { id?: string | undefined; type: keyof Renderers; data: any; }[], renderers: Renderers) => string) | undefined; } | undefined) => void; showVersion: () => void;
 }) {
 	const { unknownFlags } = argv;
 	const { optionalSpread } = argv._;
