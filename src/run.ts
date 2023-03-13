@@ -42,6 +42,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 	for (const step of steps) {
 		const { name, with: with_, if: if_, script, export: export_, uses, } = step;
 		let jobPath: string;
+		// uses and script are mutually exclusive
 		if (uses) {
 			const [dir, jobName] = uses.split(':');
 			jobPath = `./jobs/${dir}/${jobName}.js`;
