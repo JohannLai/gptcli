@@ -41,41 +41,25 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 	const { steps } = pluginConfig;
 	for (const step of steps) {
 		const { name, with: with_, if: if_, script, export: export_, uses, } = step;
+		let jobPath: string;
 		if (uses) {
 			const [dir, jobName] = uses.split(':');
-			const job = await import(`./jobs/${dir}/${jobName}.js`).then((module) => Object.values(module)[0] as any);
-
-			const jobInstance = new job({
-				name,
-				with: with_,
-				if: if_,
-				script,
-				export: export_,
-				pipeline,
-				uses,
-			} as IConfigBase);
-
-			await jobInstance.run();
-
-			continue;
+			jobPath = `./jobs/${dir}/${jobName}.js`;
+		} else {
+			jobPath = `./jobs/script.js`;
 		}
 
-		if (script) {
-			const job = await import(`./jobs/script.js`).then((module) => Object.values(module)[0] as any);
+		const job = await import(jobPath).then((module) => Object.values(module)[0] as any);
+		const jobInstance = new job({
+			name,
+			with: with_,
+			if: if_,
+			script,
+			export: export_,
+			pipeline,
+			uses,
+		} as IConfigBase);
 
-			const jobInstance = new job({
-				name,
-				with: with_,
-				if: if_,
-				script,
-				export: export_,
-				pipeline,
-				uses,
-			} as IConfigBase);
-
-			jobInstance.run();
-
-			return;
-		}
+		await jobInstance.run();
 	}
 }

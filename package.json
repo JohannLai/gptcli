@@ -34,6 +34,7 @@
 	"type": "module",
 	"exports": {
 		"./jobs/gpt/trueFalse.js": "./dist/jobs/gpt/trueFalse.js",
+		"./jobs/script.js": "./dist/jobs/script.js",
 		"./jobs/gpt/createChatCompletion.js": "./dist/jobs/gpt/createChatCompletion.js"
 	},
 	"files": [
