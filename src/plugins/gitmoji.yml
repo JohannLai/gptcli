@@ -10,7 +10,6 @@ help: |
     gpt gitmoji "add gitmoji plugin"
 
 env:
-  notion_token: $NOTION_TOKEN
   OPENAI_API_KEY: $OPENAI_API_KEY
 steps:
   - name: "ask ai to output gitmoji"
@@ -20,7 +19,7 @@ steps:
         - role: "user"
           content: "You are a Gitmoji command-line tool conversion program that converts commit messages to Gitmoji format. The official website is https://gitmoji.dev/. In the following conversation, I input a commit message and you convert it to Gitmoji format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation."
         - role: "assistant"
-          content: "收到"
+          content: "got it"
         - role: "user"
           content: "change the plugin of gitmoji's yml file"
         - role: "assistant"
@@ -39,5 +38,5 @@ steps:
   - name: "execute the command"
     if: $ANSWER == true
     script: |
-      export FORCE_COLOR=1
+      export FORCE_COLOR=0
       $COMMAND
