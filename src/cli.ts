@@ -20,15 +20,15 @@ const argv = cli({
 
 	help: {
 		// Define the help text
-		description: 'build any cli with gpt-cli by AI',
+		description: '🤖 Build any CLI with GPT-CLI by AI',
 		usage: [
 			'gpt <plugin> [optional spread...]',
 			'gpt list',
 			'gpt config [pluginName/user.key] [value]',
 		],
 		examples: [
-			'gpt gitmoji "fix a bug"',
-			'gpt config user.OPENAI_API_KEY sk-xxx'
+			'🕹️  gpt gitmoji "fix a bug"',
+			'🕹️  gpt config user.OPENAI_API_KEY sk-xxx'
 		],
 	},
 });
