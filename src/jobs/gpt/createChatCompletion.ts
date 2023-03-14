@@ -28,22 +28,18 @@ export class CreateChatCompletion extends Base {
 			}
 		});
 
-		// const spinner = ora('AI is thinking...').start();
+		ora('AI is thinking...').start();
 
-		const { data } = await createChatCompletion({
+		const data = await createChatCompletion({
 			messages: messagesWithEnv,
-		}).finally(() => {
-			// spinner.stop();
-		});
+		})
 
-		// spinner.stop();
+		if (!data) {
+			process.exit(1);
+		}
 
-		// if (!data) {
-		// 	process.exit(1);
-		// }
-
-		// if (this?.export?.response_content) {
-		// 	this.pipeline.env[this.export.response_content] = data.choices[0].message.content;
-		// }
+		if (this?.export?.response_content) {
+			this.pipeline.env[this.export.response_content] = data;
+		}
 	}
 }

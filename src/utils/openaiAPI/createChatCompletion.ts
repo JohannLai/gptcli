@@ -3,6 +3,8 @@ import chalk from "chalk";
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import ora from 'ora';
 import { fetch, ProxyAgent } from 'undici'
+import logUpdate from 'log-update';
+
 
 // export async function createChatCompletion(opt: any) {
 // 	return await axios.post('https://api.openai.com/v1/chat/completions', {
@@ -75,16 +77,12 @@ const parseOpenAIStream = (rawResponse: Response) => {
 		},
 	})
 
-	console.log(stream);
-
 	return stream
 }
 
-const baseUrl = 'https://api.openai.com'
-
+const BASE_URL = 'https://api.openai.com'
 export async function createChatCompletion(opt: any) {
-	console.log(opt);
-	const response = await fetch(`${baseUrl}/v1/chat/completions`, {
+	const response = await fetch(`${BASE_URL}/v1/chat/completions`, {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -109,16 +107,27 @@ export async function createChatCompletion(opt: any) {
 
 	const reader = data.getReader()
 	const decoder = new TextDecoder('utf-8')
-	const done = false
+	let done = false
+
+	let currentMessage = '';
 
 	while (!done) {
 		const { value, done: readerDone } = await reader.read()
-		console.log(value);
+
 		if (value) {
 			const char = decoder.decode(value)
+			if (char === '\n' && currentMessage.endsWith('\n')) {
+				continue
+			}
 
-			console.log(char);
+			if (char) {
+				currentMessage += char;
+				logUpdate(chalk.green('❯', currentMessage));
+			}
 		}
 
+		done = readerDone
 	}
+
+	return currentMessage;
 }
