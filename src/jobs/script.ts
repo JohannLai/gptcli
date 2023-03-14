@@ -32,8 +32,6 @@ export class Script extends Base {
 					this.pipeline.env[this.export[item.name]] = item.value;
 				}
 			})
-
-			console.log(result.stdout);
 		}
 	}
 
