@@ -57,12 +57,10 @@ export abstract class Base {
 			let stdout = '';
 			let stderr = '';
 			process.stdout.on('data', (data) => {
-				// console.log(chalk.reset(data));
 				stdout += data;
 				logUpdate(data);
 			});
 			process.stderr.on('data', (data) => {
-				console.log(chalk.reset(data));
 				stderr += data;
 				logUpdate(data);
 			});
