@@ -71,6 +71,7 @@
 		"inquirer": "^9.1.4",
 		"install": "^0.13.0",
 		"js-yaml": "^4.1.0",
+		"log-update": "^5.0.1",
 		"manten": "^0.7.0",
 		"openai": "^3.2.1",
 		"ora": "^6.1.2"

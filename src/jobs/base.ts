@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 import chalk from 'chalk';
-import ansiRegex from 'ansi-regex';
+import logUpdate from 'log-update';
 import { replaceEnvVariables } from '../utils/replaceEnvVariables.js';
 
 export interface IConfigBase {
@@ -57,12 +57,14 @@ export abstract class Base {
 			let stdout = '';
 			let stderr = '';
 			process.stdout.on('data', (data) => {
-				console.log(chalk.reset(data));
+				// console.log(chalk.reset(data));
 				stdout += data;
+				logUpdate(data);
 			});
 			process.stderr.on('data', (data) => {
 				console.log(chalk.reset(data));
 				stderr += data;
+				logUpdate(data);
 			});
 			process.on('close', (code) => {
 				if (code !== 0) {
