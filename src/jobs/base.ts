@@ -13,7 +13,7 @@ export interface IConfigBase {
 	export?: {
 		[key: string]: any;
 	}
-	uses: string;
+	uses?: string;
 	pipeline: {
 		env: {
 			[key: string]: any;
@@ -73,22 +73,22 @@ export abstract class Base {
 		});
 	}
 
-	private execIfScript = async (script: string) => {
-		const ifWithEnv = replaceEnvVariables(script, this.pipeline.env);
-		// security risk
-		const result = eval(ifWithEnv);
-		if (result) {
-			return true;
-		} else {
-			process.exit(0);
+	private execIfCondition = async (condition: string) => {
+		const ifWithEnv = replaceEnvVariables(condition, this.pipeline.env);
+
+		try {
+			return eval(`Boolean(${ifWithEnv})`);
+		} catch (e) {
+			console.error('Error occurred while running the if statement:', e);
+			return false;
 		}
 	}
 
 	public async run() {
 		if (this.if) {
-			const result = await this.execIfScript(this.if);
+			const result = await this.execIfCondition(this.if);
 			if (!result) {
-				return;
+				process.exit(0);
 			}
 		}
 	}

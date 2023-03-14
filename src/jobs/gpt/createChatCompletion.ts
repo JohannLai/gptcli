@@ -15,6 +15,8 @@ export class CreateChatCompletion extends Base {
 	}
 
 	public async run() {
+		super.run();
+
 		const { messages } = this.with as { messages: IMessages };
 		// 给 messages 中的 item 的 content 加上环境变量
 		const messagesWithEnv = messages.map((item) => {

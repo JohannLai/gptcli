@@ -8,6 +8,8 @@ export class TrueFalse extends Base {
 	}
 
 	public async run() {
+		super.run();
+
 		const { message } = this.with as {
 			message: string,
 		};
