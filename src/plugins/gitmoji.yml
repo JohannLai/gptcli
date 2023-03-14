@@ -39,4 +39,5 @@ steps:
   - name: "execute the command"
     if: $ANSWER == true
     script: |
+      export FORCE_COLOR=1
       $COMMAND
