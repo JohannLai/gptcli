@@ -1,8 +1,9 @@
 import axios from "axios";
 import chalk from "chalk";
+import ora from 'ora';
 
 export async function createChatCompletion(opt: any) {
-	const { data } = await axios.post('https://api.openai.com/v1/chat/completions', {
+	return await axios.post('https://api.openai.com/v1/chat/completions', {
 		model: "gpt-3.5-turbo",
 		...opt
 	}, {
@@ -11,6 +12,7 @@ export async function createChatCompletion(opt: any) {
 			'Content-Type': 'application/json'
 		}
 	}).then(res => res, (err) => {
+		ora().fail("Open AI API Error");
 		console.error(chalk.red('Error:', err.response.data.error.message));
 		console.error(chalk.reset(`
 	Possible reasons:
@@ -26,6 +28,4 @@ export async function createChatCompletion(opt: any) {
 
 		return err;
 	});
-
-	return data;
 }
