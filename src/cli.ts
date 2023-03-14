@@ -4,7 +4,6 @@ import chalk from 'chalk';
 import { getPluginConfig } from './utils/getPluginConfig.js';
 import { getConfigFromGptrc, setConfigToGptrc } from './utils/gptrc.js';
 import { readdirSync } from 'fs';
-import path from 'path';
 import { join } from 'path';
 
 const argv = cli({
@@ -20,11 +19,11 @@ const argv = cli({
 
 	help: {
 		// Define the help text
-		description: '🤖 Build any CLI with GPT-CLI by AI',
+		description: '✨ Build any CLI with AI in seconds',
 		usage: [
-			'gpt <plugin> [optional spread...]',
-			'gpt list',
-			'gpt config [pluginName/user.key] [value]',
+			'👉 gpt <plugin> [optional spread...]',
+			'👉 gpt list',
+			'👉 gpt config [pluginName/user.key] [value]',
 		],
 		examples: [
 			'🕹️  gpt gitmoji "fix a bug"',
