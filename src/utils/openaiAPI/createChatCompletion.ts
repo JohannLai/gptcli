@@ -93,11 +93,14 @@ export async function createChatCompletion(opt: any) {
 			...opt,
 			stream: true,
 		}),
+	}).catch(err => {
+		console.log(chalk.red(`Error: request openai error, ${err.message}`))
+		return err
 	}) as unknown as Response;
 
 	const streamRes = new Response(parseOpenAIStream(response))
-	if (!response.ok) {
-		throw new Error(response.statusText)
+	if (!response?.ok) {
+		process.exit(1)
 	}
 
 	const data = streamRes.body;
