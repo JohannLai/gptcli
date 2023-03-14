@@ -29,7 +29,7 @@ export class CreateChatCompletion extends Base {
 		});
 
 		// show loading
-		const spinner = ora('gitmoji AI is thinking...').start();
+		const spinner = ora('AI is thinking...').start();
 
 		const { data } = await axios.post('https://api.openai.com/v1/chat/completions', {
 			model: "gpt-3.5-turbo",
