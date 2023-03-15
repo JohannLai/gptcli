@@ -56,14 +56,17 @@ export abstract class Base {
 
 			let stdout = '';
 			let stderr = '';
+
 			process.stdout.on('data', (data) => {
 				stdout += data;
-				logUpdate(data);
+				logUpdate(stdout);
 			});
+
 			process.stderr.on('data', (data) => {
 				stderr += data;
 				logUpdate(data);
 			});
+
 			process.on('close', (code) => {
 				if (code !== 0) {
 					reject(stderr);
