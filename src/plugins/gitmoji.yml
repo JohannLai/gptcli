@@ -29,7 +29,7 @@ steps:
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
-    uses: "gpt:trueFalse"
+    uses: "gpt:confirm"
     with:
       message: "execute `$COMMAND`?"
       default: true

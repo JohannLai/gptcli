@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import { Base, IConfigBase } from '../base.js';
 import { replaceEnvVariables } from '../../utils/replaceEnvVariables.js';
 
-export class TrueFalse extends Base {
+export class Confirm extends Base {
 	constructor(args: IConfigBase) {
 		super(args);
 	}
