@@ -1,5 +1,7 @@
 import yaml from 'js-yaml';
-import fs from 'fs';
+import fs from 'fs/promises';
+import { PLUGINS_DIR } from '../constants.js';
+import path from 'path';
 
 export interface IPluginConfig {
 	name: string;
@@ -27,12 +29,23 @@ export interface IPluginConfig {
 	}[];
 }
 
-export const getPluginConfig = (pluginName: string): IPluginConfig => {
-	// find the plugin config file in plugins folder
-	const pluginConfigFile = fs.readFileSync(`./src/plugins/${pluginName}.yml`, 'utf8');
+export const getPluginConfig = async (pluginName: string) => {
+	let pluginConfigFile = '';
+	// find the plugin config file in /src/plugins/${pluginName}.yml
+	// if not found, find the plugin config in PLUGINS_DIR
+	const srcConfigPath = path.join(__dirname, '..', 'src', 'plugins', `${pluginName}.yml`);
+	const configPath = path.join(PLUGINS_DIR, `${pluginName}.yml`);
 
-	if (!pluginConfigFile) {
-		throw new Error(`Plugin ${pluginName} not found`);
+	try {
+		// Read the plugin config file from the source directory
+		pluginConfigFile = await fs.readFile(srcConfigPath, 'utf8');
+	} catch (error) {
+		// If the config file doesn't exist in the source directory, try to read it from the plugins directory
+		try {
+			pluginConfigFile = await fs.readFile(configPath, 'utf8');
+		} catch (error) {
+			throw new Error(`Plugin config file not found: ${pluginName}`);
+		}
 	}
 
 	const pluginConfig = yaml.load(pluginConfigFile);
