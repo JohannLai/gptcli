@@ -31,13 +31,15 @@ export interface IPluginConfig {
 
 export const getPluginConfig = async (pluginName: string) => {
 	let pluginConfigFile = '';
+
 	// find the plugin config file in /src/plugins/${pluginName}.yml
 	// if not found, find the plugin config in PLUGINS_DIR
-	const srcConfigPath = path.join(__dirname, '..', 'src', 'plugins', `${pluginName}.yml`);
+	const __dirname = path.dirname(new URL(import.meta.url).pathname);
+	const srcConfigPath = path.join(__dirname, "..", 'src', 'plugins', `${pluginName}.yml`);
+
 	const configPath = path.join(PLUGINS_DIR, `${pluginName}.yml`);
 
 	try {
-		// Read the plugin config file from the source directory
 		pluginConfigFile = await fs.readFile(srcConfigPath, 'utf8');
 	} catch (error) {
 		// If the config file doesn't exist in the source directory, try to read it from the plugins directory

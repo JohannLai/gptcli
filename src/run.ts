@@ -52,6 +52,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 		}
 
 		const job = await import(jobPath).then((module) => Object.values(module)[0] as any).catch((err) => {
+			console.error(err)
 			console.error(chalk.red(`Error: Plugin ${pluginConfig.name} Not Found`));
 			process.exit(1);
 		});

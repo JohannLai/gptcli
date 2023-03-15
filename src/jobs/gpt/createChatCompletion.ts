@@ -1,7 +1,7 @@
 import { Base, IConfigBase } from '../base.js';
 import { replaceEnvVariables } from '../../utils/replaceEnvVariables.js';
 import { createChatCompletion } from '../../utils/openaiAPI/createChatCompletion.js';
-import ora from 'ora';
+import { startLoading } from '../../utils/loading.js';
 
 export type IMessages = Array<{
 	content: string;
@@ -16,6 +16,8 @@ export class CreateChatCompletion extends Base {
 	public async run() {
 		super.run();
 
+		startLoading('AI is thinking ...');
+
 		const { messages } = this.with as { messages: IMessages };
 		const messagesWithEnv = messages.map((item) => {
 			return {
@@ -27,8 +29,6 @@ export class CreateChatCompletion extends Base {
 				})
 			}
 		});
-
-		ora('AI is thinking...').start();
 
 		const data = await createChatCompletion({
 			messages: messagesWithEnv,

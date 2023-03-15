@@ -32,7 +32,7 @@ steps:
   - name: "ask if user want to execute the command"
     uses: "gpt:confirm"
     with:
-      message: "execute `$COMMAND`?"
+      message: "execute the command above ⬆️ ? "
       default: true
     export:
       answer: ANSWER

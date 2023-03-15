@@ -71,7 +71,7 @@ if (argv._[0] == 'config') {
 	process.exit(0);
 }
 
-const pluginConfig = getPluginConfig(plugin);
+const pluginConfig = await getPluginConfig(plugin);
 
 // Print plugin info
 if (optionalSpread[0] == 'info') {

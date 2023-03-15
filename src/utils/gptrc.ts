@@ -9,8 +9,6 @@ import { CONFIG_FILE_PATH } from '../constants.js';
 // [gitmoji]
 // token = 123
 
-const
-
 export function getConfigFromGptrc(scope: string, key: string) {
 	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
 	const configObject = ini.parse(config);
