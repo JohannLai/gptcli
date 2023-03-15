@@ -2,8 +2,7 @@ import chalk from "chalk";
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import { fetch, ProxyAgent } from 'undici'
 import { stopLoading } from "../loading.js";
-import logUpdate from 'log-update';
-
+import { OPENAI_BASE_URL } from "../../constants.js";
 
 const parseOpenAIStream = (rawResponse: Response) => {
 	const encoder = new TextEncoder()
@@ -52,9 +51,10 @@ const parseOpenAIStream = (rawResponse: Response) => {
 	return stream
 }
 
-const BASE_URL = 'https://api.openai.com'
-export async function createChatCompletion(opt: any) {
-	const response = await fetch(`${BASE_URL}/v1/chat/completions`, {
+export async function createChatCompletion(options: { [x: string]: any; messages?: { content: string; role: "user" | "assistant"; }[]; onMessage: (data: string) => void }) {
+	const { onMessage, ...fetchOptions } = options
+
+	const response = await fetch(`${OPENAI_BASE_URL}/v1/chat/completions`, {
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -62,7 +62,7 @@ export async function createChatCompletion(opt: any) {
 		method: 'POST',
 		body: JSON.stringify({
 			model: "gpt-3.5-turbo",
-			...opt,
+			...fetchOptions,
 			stream: true,
 		}),
 	}).catch(err => {
@@ -97,7 +97,7 @@ export async function createChatCompletion(opt: any) {
 
 			if (char) {
 				currentMessage += char;
-				logUpdate(chalk.green('❯', currentMessage));
+				onMessage(currentMessage);
 			}
 		}
 

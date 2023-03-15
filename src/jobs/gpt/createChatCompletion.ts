@@ -1,7 +1,10 @@
 import { Base, IConfigBase } from '../base.js';
 import { replaceEnvVariables } from '../../utils/replaceEnvVariables.js';
 import { createChatCompletion } from '../../utils/openaiAPI/createChatCompletion.js';
-import { startLoading } from '../../utils/loading.js';
+import { startLoading, stopLoading } from '../../utils/loading.js';
+import logUpdate from 'log-update';
+import chalk from 'chalk';
+
 
 export type IMessages = Array<{
 	content: string;
@@ -32,6 +35,10 @@ export class CreateChatCompletion extends Base {
 
 		const data = await createChatCompletion({
 			messages: messagesWithEnv,
+			onMessage: (message) => {
+				stopLoading();
+				logUpdate(chalk.green('❯', message));
+			}
 		})
 
 		if (!data) {

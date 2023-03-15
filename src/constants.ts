@@ -7,3 +7,5 @@ export const CONFIG_DIR = path.join(homeDir, '.config', 'gpt-cli');
 export const CONFIG_FILE_PATH = path.join(CONFIG_DIR, '.gptrc');
 // installed plugins dir
 export const PLUGINS_DIR = path.join(CONFIG_DIR, 'plugins');
+
+export const OPENAI_BASE_URL = 'https://api.openai.com'
