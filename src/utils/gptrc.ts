@@ -9,6 +9,14 @@ import { CONFIG_FILE_PATH } from '../constants.js';
 // [gitmoji]
 // token = 123
 
+type scopeConfig = {
+	[key: string]: string;
+};
+
+type config = {
+	[scope: string]: scopeConfig;
+};
+
 export function getConfigFromGptrc(scope: string, key: string) {
 	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
 	const configObject = ini.parse(config);
@@ -21,6 +29,21 @@ export function setConfigToGptrc(scope: string, key: string, value: string) {
 	fs.writeFileSync(CONFIG_FILE_PATH, ini.stringify(config));
 }
 
+export function getScopeConfig(scope: string) {
+	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
+	const configObject = ini.parse(config);
+	return configObject[scope];
+}
 
+// get multiple scopes config, e.g: ['user', 'gitmoji']
+// last scope config will override the previous one
+export function getScopesConfig(scopes: string[]): scopeConfig {
+	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
+	const configObject = ini.parse(config);
+	let result: scopeConfig = {};
+	scopes.forEach((scope) => {
+		result = { ...result, ...configObject[scope] };
+	});
 
-
+	return result;
+}

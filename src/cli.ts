@@ -59,7 +59,6 @@ if (argv._[0] == 'config') {
 	const isSet = argv._.optionalSpread.length == 2;
 
 	if (!isSet) {
-		// print config
 		const [scope, key] = argv._.optionalSpread[0].split('.');
 		const config = getConfigFromGptrc(scope, key);
 

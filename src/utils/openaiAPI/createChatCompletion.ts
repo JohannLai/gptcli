@@ -4,12 +4,12 @@ import { OPENAI_BASE_URL } from "../../constants.js";
 import { parseOpenAIStream } from "./parseOpenAIStream.js";
 
 export async function createChatCompletion(options: { [x: string]: any; messages?: { content: string; role: "user" | "assistant"; }[]; onMessage: (data: string) => void }) {
-	const { onMessage, ...fetchOptions } = options
+	const { apiKey, onMessage, ...fetchOptions } = options
 
 	const response = await fetch(`${OPENAI_BASE_URL}/v1/chat/completions`, {
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+			Authorization: `Bearer ${apiKey}`,
 		},
 		method: 'POST',
 		body: JSON.stringify({

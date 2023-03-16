@@ -3,6 +3,7 @@ import { Renderers } from "cleye";
 import { IConfigBase } from "./jobs/base.js";
 import { IPluginConfig } from "./utils/getPluginConfig.js";
 import { replaceEnvVariables } from "./utils/replaceEnvVariables.js";
+import { getScopesConfig } from './utils/gptrc.js';
 
 export interface IPipeline {
 	env: {
@@ -28,6 +29,12 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 		pipeline.env[key] = replaceEnvVariables(pluginConfig.env[key], {
 			...process.env,
 		});
+	})
+
+	// load config from gptrc of user and plugin name into pipeline
+	const scopesConfig = await getScopesConfig(['user', pluginConfig.name]);
+	Object.keys(scopesConfig).forEach((key) => {
+		pipeline.env[key] = scopesConfig[key];
 	})
 
 	Object.keys(unknownFlags).forEach((flag) => {
