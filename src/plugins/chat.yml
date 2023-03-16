@@ -1,0 +1,10 @@
+name: chat
+description: "chat with ChatGpt"
+repository: "johannlai/gptcli"
+author: "johannlai"
+help: |
+env:
+  OPENAI_API_KEY: $OPENAI_API_KEY
+steps:
+  - name: "chat with ChatGpt"
+    uses: "gpt:chat"
