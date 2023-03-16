@@ -5,11 +5,15 @@ import { getPluginConfig } from './utils/getPluginConfig.js';
 import { getConfigFromGptrc, setConfigToGptrc } from './utils/gptrc.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import { getPackageVersion } from './utils/getPackageJson.js';
+
+const version = await getPackageVersion();
 
 const argv = cli({
 	name: 'gpt-cli',
 
-	// Define parameters
+	version: `🔥 v${version}`,
+
 	parameters: [
 		'<plugin>',
 		'[optional spread...]'
@@ -18,7 +22,7 @@ const argv = cli({
 	flags: {},
 
 	help: {
-		// Define the help text
+		version: `🔥 v${version}`,
 		description: '✨ Build any CLI with AI in seconds',
 		usage: [
 			'👉 gpt <plugin> [optional spread...]',
@@ -31,6 +35,7 @@ const argv = cli({
 		],
 	},
 });
+
 
 const { plugin, optionalSpread } = argv._;
 
