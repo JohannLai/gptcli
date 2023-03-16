@@ -2,6 +2,7 @@ import yaml from 'js-yaml';
 import fs from 'fs/promises';
 import { PLUGINS_DIR } from '../constants.js';
 import path from 'path';
+import * as url from 'url'
 
 export interface IPluginConfig {
 	name: string;
@@ -34,8 +35,8 @@ export const getPluginConfig = async (pluginName: string) => {
 
 	// find the plugin config file in /src/plugins/${pluginName}.yml
 	// if not found, find the plugin config in PLUGINS_DIR
-	const __dirname = path.dirname(new URL(import.meta.url).pathname);
-	const srcConfigPath = path.join(__dirname, "..", 'src', 'plugins', `${pluginName}.yml`);
+	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
+	const srcConfigPath = path.join(dirname, "..", 'src', 'plugins', `${pluginName}.yml`);
 
 	const configPath = path.join(PLUGINS_DIR, `${pluginName}.yml`);
 
