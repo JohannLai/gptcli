@@ -24,11 +24,10 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 		config: pluginConfig,
 	};
 
+
 	// replace plugin env variables
 	Object.keys(pluginConfig.env).forEach((key) => {
-		pipeline.env[key] = replaceEnvVariables(pluginConfig.env[key], {
-			...process.env,
-		});
+		pipeline.env[key] = pluginConfig.env[key]
 	})
 
 	// load config from gptrc of user and plugin name into pipeline

@@ -1,20 +1,14 @@
 // get key value from set-output
-// "::set-output name={name}::{value} name={name}::{value} "
+// "::set-output name={name}::{value}"
 
-export function getOutput(str: string): {
-	name: string;
-	value: string;
-}[] {
-	const reg = /::set-output name=(\w+)::(\w+)/g;
-	const result = str.match(reg);
-	if (result) {
-		return result.map((item) => {
-			const [name, value] = item.split('::');
-			return {
-				name,
-				value,
-			};
-		});
+export function getSetOutputFromLog(log: string): Record<string, string> {
+	const pattern = /::set-output name=(\w+)::(.+)/g;
+	const result: Record<string, string> = {};
+	let match;
+	while ((match = pattern.exec(log))) {
+		const key = match[1];
+		const value = match[2];
+		result[key] = value;
 	}
-	return [];
+	return result;
 }

@@ -23,6 +23,7 @@ export class CreateChatCompletion extends Base {
 		startLoading('AI is thinking ...');
 
 		const { messages } = this.with as { messages: IMessages };
+		console.log(messages)
 		const messagesWithEnv = messages.map((item) => {
 			return {
 				...item,

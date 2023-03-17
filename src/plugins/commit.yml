@@ -11,13 +11,12 @@ help: |
     gpt command "find all txt files in current directory"
 
 env:
-  OPENAI_API_KEY: $OPENAI_API_KEY
-  LOCALE: $LOCALE
+  LOCALE: en
 steps:
   - name: "get diff"
     script: |
-      diff_output=$(git diff HEAD)
-      echo "::set-output name=diff::$diff_output"
+      export diff_output=$(git diff HEAD)
+      echo "::set-output name=diff::'$diff_output'"
     export:
       diff: diff
   - name: "ask ai to output command"
@@ -25,17 +24,17 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything, the response must be in the language ${LOCALE}:\n${diff}"
+          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything, not more than 100 characters, the response must be in the language ${LOCALE}:\n${diff}"
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
     uses: "gpt:confirm"
     with:
-      message: "execute the command above ⬆️ ? "
+      message: "Would you like to use this commit message ⬆️ ? "
       default: true
     export:
       answer: ANSWER
   - name: "execute the command"
     if: $ANSWER == true
     script: |
-      $COMMAND
+      git commit -m"$COMMAND"
