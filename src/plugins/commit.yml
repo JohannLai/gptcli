@@ -24,7 +24,7 @@ steps:
     if: |
       "$style" == "cz"
     script: |
-      echo "::set-output name=otherPrompt::'make it into commitizen style , e.g: feat: add new feature'"
+      echo "::set-output name=otherPrompt::'make it into commitizen style , e.g: feat: add new feature, fix: fix bug, refactor: refactor code, docs: add document, style: change code style, test: add test, chore: change build process or tool"
     export:
       otherPrompt: otherPrompt
   # - name: if style is cz then set prompt to gitmoji
