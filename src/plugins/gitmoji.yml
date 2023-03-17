@@ -10,7 +10,6 @@ help: |
     gpt gitmoji "add gitmoji plugin"
 
 env:
-  OPENAI_API_KEY: $OPENAI_API_KEY
 steps:
   - name: "ask ai to output gitmoji"
     uses: "gpt:createChatCompletion"

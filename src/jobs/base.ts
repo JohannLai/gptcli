@@ -59,18 +59,21 @@ export abstract class Base {
 
 			process.stdout.on('data', (data) => {
 				stdout += data;
-				logUpdate(stdout);
+				// logUpdate(stdout);
 			});
 
 			process.stderr.on('data', (data) => {
 				stderr += data;
-				logUpdate(data);
+				// logUpdate(data);
 			});
 
 			process.on('close', (code) => {
 				if (code !== 0) {
 					reject(stderr);
 				}
+
+				console.log(stdout);
+
 				resolve({ code: 0, stdout, stderr });
 			});
 		});

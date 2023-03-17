@@ -11,7 +11,8 @@ help: |
     gpt command "find all txt files in current directory"
 
 env:
-  LOCALE: en
+  LOCALE: "en"
+  style: "cz"
 steps:
   - name: "get diff"
     script: |
@@ -19,12 +20,28 @@ steps:
       echo "::set-output name=diff::'$diff_output'"
     export:
       diff: diff
+  - name: if style is cz then set prompt to cz
+    if: |
+      "$style" == "cz"
+    script: |
+      echo "::set-output name=otherPrompt::'make it into commitizen style , e.g: feat: add new feature'"
+    export:
+      otherPrompt: otherPrompt
+  # - name: if style is cz then set prompt to gitmoji
+  #   if: |
+  #     "$style" == "gitmoji"
+  #   script: |
+  #     echo "::set-output name=otherPrompt::'make it into gitmoji style like :pencil2: xxx'"
+  #   export:
+  #     otherPrompt: otherPrompt
   - name: "ask ai to output command"
     uses: "gpt:createChatCompletion"
     with:
       messages:
         - role: "user"
-          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything, not more than 100 characters, the response must be in the language ${LOCALE}:\n${diff}"
+          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything, not more than 100 characters, the response must be in the language ${LOCALE}:\n${diff} \n "
+        - role: "user"
+          content: $otherPrompt
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
