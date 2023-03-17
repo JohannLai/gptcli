@@ -39,7 +39,7 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything with gitmoji style, not more than 100 characters, the response must be in the language ${LOCALE}:\n${diff} \n "
+          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it with anything with bottom style, not more than 100 characters, the response must be in the language ${LOCALE}:\n${diff} \n "
         - role: "user"
           content: $otherPrompt
     export:
