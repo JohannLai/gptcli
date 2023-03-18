@@ -73,7 +73,5 @@ steps:
     export:
       answer: ANSWER
   - name: "execute the command"
-    if: $ANSWER == true
     script: |
-      echo "git commit -m"$COMMAND""
-      git commit -m"$COMMAND"
+      $COMMAND
