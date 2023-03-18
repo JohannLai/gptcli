@@ -41,7 +41,7 @@ const { plugin, optionalSpread } = argv._;
 
 // List all plugins
 if (argv._[0] == 'list') {
-	const plugins = readdirSync(join(process.cwd(), 'src/plugins')).map((plugin) => plugin.replace('.yml', ''));
+	const plugins = readdirSync(join(process.cwd(), 'plugins')).map((plugin) => plugin.replace('.yml', ''));
 	console.log(plugins)
 
 	console.log(`
