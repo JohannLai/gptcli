@@ -1,5 +1,5 @@
 {
-	"name": "gptcli",
+	"name": "@johannlai/gptcli",
 	"version": "0.0.0-semantic-release",
 	"description": "",
 	"scripts": {
