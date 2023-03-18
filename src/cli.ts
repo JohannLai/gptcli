@@ -52,6 +52,7 @@ if (argv._[0] == 'list') {
 	process.exit(0);
 }
 
+
 // Config plugin
 // TODO: can be refactored to a plugin, use plugin/gpt/config.yml
 if (argv._[0] == 'config') {
@@ -86,6 +87,13 @@ if (optionalSpread[0] == 'info') {
     Repository: ${chalk.underline(`https://github.com/${repository}`)}
     authored by: ${pluginConfig.author}
 `);
+
+	process.exit(0);
+}
+
+// Print plugin help
+if (optionalSpread[0] == 'help') {
+	console.log(pluginConfig.help);
 
 	process.exit(0);
 }

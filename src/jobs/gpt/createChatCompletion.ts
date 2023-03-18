@@ -36,8 +36,6 @@ export class CreateChatCompletion extends Base {
 			}
 		});
 
-		console.log(messagesWithEnv)
-
 		const apiKey = this.pipeline.env.OPENAI_API_KEY || getFreeOpenaiKey();
 
 		const data = await createChatCompletion({

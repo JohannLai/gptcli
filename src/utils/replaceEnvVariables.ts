@@ -2,6 +2,10 @@ export function replaceEnvVariables(str: string, env: { [key: string]: any }): s
 	// e.g. ${LOCALE} 和 $LOCALE
 	const reg = /\${?(\w+)}?/g;
 	return str.replace(reg, (match, variableName) => {
-		return env[variableName] || undefined;
+		// if env[variableName] is empty string "", return '""'
+		if (env[variableName] === '') {
+			return '""';
+		}
+		return env[variableName];
 	});
 }

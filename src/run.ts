@@ -4,6 +4,7 @@ import { IConfigBase } from "./jobs/base.js";
 import { IPluginConfig } from "./utils/getPluginConfig.js";
 import { replaceEnvVariables } from "./utils/replaceEnvVariables.js";
 import { getScopesConfig } from './utils/gptrc.js';
+import path from "path";
 
 export interface IPipeline {
 	env: {

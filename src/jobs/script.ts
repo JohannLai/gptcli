@@ -28,10 +28,6 @@ export class Script extends Base {
 
 		const outputs = getSetOutputFromLog(result.stdout);
 
-		console.log(111, result.stdout);
-		console.log(222, outputs);
-
-		// export outputs
 		Object.keys(outputs).forEach((key) => {
 			this.pipeline.env[key] = outputs[key];
 		});

@@ -16,4 +16,11 @@ describe('test gptcli', function () {
 		const result = replaceEnvVariables(str, env);
 		assert.equal(result, 'false == false');
 	})
+
+	it('test gptcli.replaceEnvVariables of false', function () {
+		const str = '$ANSWER == false';
+		const env = { ANSWER: "" };
+		const result = replaceEnvVariables(str, env);
+		assert.equal(result, '"" == false');
+	})
 })

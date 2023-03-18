@@ -4,11 +4,11 @@ import { Base, IConfigBase } from '../base.js';
 import { createChatCompletion } from '../../utils/openaiAPI/createChatCompletion.js';
 import { startLoading, stopLoading } from '../../utils/loading.js';
 import logUpdate from 'log-update';
+import { getFreeOpenaiKey } from '../../utils/openaiAPI/getFreeOpenaiKey.js';
 
 /**
  * chat with gpt
  * ask a question and get an answer , loop until you say "bye"
- * @example
  **/
 export class Chat extends Base {
 	constructor(args: IConfigBase) {
@@ -43,8 +43,9 @@ export class Chat extends Base {
 			messages.push("");
 
 			startLoading('AI is thinking ...');
+			const apiKey = this.pipeline.env.OPENAI_API_KEY || getFreeOpenaiKey();
 			await createChatCompletion({
-				apiKey: this.pipeline.env.OPENAI_API_KEY,
+				apiKey,
 				messages: [
 					{
 						content: question,

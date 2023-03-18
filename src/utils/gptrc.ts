@@ -17,16 +17,29 @@ type config = {
 	[scope: string]: scopeConfig;
 };
 
-export function getConfigFromGptrc(scope: string, key: string) {
+export function getAllConfigFromGptrc() {
 	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
 	const configObject = ini.parse(config);
-	return configObject[scope][key];
+	return configObject;
+}
+
+export function getConfigFromGptrc(scope: string, key: string) {
+	const configObject = getAllConfigFromGptrc()
+	return configObject?.[scope]?.[key];
 }
 
 export function setConfigToGptrc(scope: string, key: string, value: string) {
-	const config = getConfigFromGptrc(scope, key);
-	config[scope][key] = value;
-	fs.writeFileSync(CONFIG_FILE_PATH, ini.stringify(config));
+	const allConfig = getAllConfigFromGptrc();
+	const configObject: config = {
+		...allConfig,
+		[scope]: {
+			...allConfig[scope],
+			[key]: value,
+		},
+	};
+
+	const configString = ini.stringify(configObject);
+	fs.writeFileSync(CONFIG_FILE_PATH, configString);
 }
 
 export function getScopeConfig(scope: string) {

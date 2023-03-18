@@ -6,9 +6,9 @@ help: |
   cz plugin for gpt cli
 
   Usage:
+    ❯ gpt cz "fix a bug of helpCenter"
 
-    gpt cz "fix a bug of helpCenter"
-    > git commit -m'fix(helpCenter): fix a bug of helpCenter'
+    ❯ git commit -m'fix(helpCenter): fix a bug of helpCenter'
 
 env:
 steps:

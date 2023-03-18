@@ -3,8 +3,11 @@ description: "chat with ChatGpt"
 repository: "johannlai/gptcli"
 author: "johannlai"
 help: |
-env:
-  OPENAI_API_KEY: $OPENAI_API_KEY
+  chat with ChatGpt
+  Usage:
+    ❯ gpt chat "how are you?"
+
+    ❯ gpt chat "what's your name?"
 steps:
   - name: "chat with ChatGpt"
     uses: "gpt:chat"
