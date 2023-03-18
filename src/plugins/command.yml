@@ -8,7 +8,7 @@ help: |
 
   Usage:
 
-    gpt command "find all txt files in current directory"
+    gpt command "find all txt files in current directory"no
 steps:
   - name: "ask ai to output command"
     uses: "gpt:createChatCompletion"
