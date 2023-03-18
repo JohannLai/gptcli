@@ -18,9 +18,11 @@ export class CreateChatCompletion extends Base {
 	}
 
 	public async run() {
-		super.run();
+		if (!await super.run()) {
+			return;
+		}
 
-		startLoading('AI is thinking ...');
+		!this.silent && startLoading('AI is thinking ...');
 
 		const { messages } = this.with as { messages: IMessages };
 		const messagesWithEnv = messages.map((item) => {
@@ -34,18 +36,21 @@ export class CreateChatCompletion extends Base {
 			}
 		});
 
-		const apiKey = this.pipeline.env.OPENAI_API_KEY || await getFreeOpenaiKey();
+		console.log(messagesWithEnv)
+
+		const apiKey = this.pipeline.env.OPENAI_API_KEY || getFreeOpenaiKey();
 
 		const data = await createChatCompletion({
 			apiKey,
 			messages: messagesWithEnv,
 			onMessage: (message) => {
 				stopLoading();
-				logUpdate(chalk.green('❯', message));
+				!this.silent && logUpdate(chalk.green('❯', message));
 			}
 		})
 
 		if (!data) {
+			console.log(chalk.red(this.name + 'Error: no data'));
 			process.exit(1);
 		}
 

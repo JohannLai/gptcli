@@ -17,7 +17,9 @@ export class CopyToClipboard extends Base {
 	}
 
 	public async run() {
-		super.run();
+		if (!await super.run()) {
+			return;
+		}
 
 		const { text } = this.with as {
 			text: string,

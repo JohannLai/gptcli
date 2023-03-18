@@ -7,7 +7,9 @@ export class Script extends Base {
 	}
 
 	public async run() {
-		super.run();
+		if (!await super.run()) {
+			return;
+		}
 
 		if (!this.script) {
 			return;
@@ -25,6 +27,9 @@ export class Script extends Base {
 		}
 
 		const outputs = getSetOutputFromLog(result.stdout);
+
+		console.log(111, result.stdout);
+		console.log(222, outputs);
 
 		// export outputs
 		Object.keys(outputs).forEach((key) => {

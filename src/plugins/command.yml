@@ -9,9 +9,6 @@ help: |
   Usage:
 
     gpt command "find all txt files in current directory"
-
-env:
-  OPENAI_API_KEY: $OPENAI_API_KEY
 steps:
   - name: "ask ai to output command"
     uses: "gpt:createChatCompletion"

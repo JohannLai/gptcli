@@ -18,6 +18,7 @@ export interface IPluginConfig {
 		uses?: string;
 		if?: string;
 		script?: string | string[];
+		silent?: boolean;
 		with?: {
 			messages: {
 				role: string;

@@ -7,5 +7,5 @@ export function startLoading(text: string) {
 }
 
 export function stopLoading() {
-	spinner.stop();
+	spinner && spinner.stop();
 }

@@ -13,7 +13,11 @@ export interface IPipeline {
 }
 
 export async function run(pluginConfig: IPluginConfig, argv: {
-	command: undefined; flags: { help: boolean | undefined; }; unknownFlags: { [flagName: string]: (string | boolean)[]; }; _: string[] & { "--": string[]; } & { plugin: string; optionalSpread: string[]; }; showHelp: (options?: { version?: string | undefined; description?: string | undefined; usage?: string | false | string[] | undefined; examples?: string | string[] | undefined; render?: ((nodes: { id?: string | undefined; type: keyof Renderers; data: any; }[], renderers: Renderers) => string) | undefined; } | undefined) => void; showVersion: () => void;
+	command: undefined; flags: { version: boolean | undefined; help: boolean | undefined; }; unknownFlags: { [flagName: string]: (string | boolean)[]; }; _: string[] & { "--": string[]; } & { plugin: string; optionalSpread: string[]; }; showHelp: (options?: {
+		version?: string | undefined; description?: string | undefined; usage?: string | false | string[] | undefined; examples?: string | string[] | undefined; render?: ((nodes: { id?: string | undefined; type: keyof Renderers; data: any; }[], renderers: Renderers
+			// prepare pipeline
+		) => string) | undefined;
+	} | undefined) => void; showVersion: () => void;
 }) {
 	const { unknownFlags } = argv;
 	const { optionalSpread } = argv._;
@@ -26,7 +30,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 
 
 	// replace plugin env variables
-	Object.keys(pluginConfig.env).forEach((key) => {
+	pluginConfig.env && Object.keys(pluginConfig.env).forEach((key) => {
 		pipeline.env[key] = pluginConfig.env[key]
 	})
 
@@ -47,7 +51,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 	// run steps
 	const { steps } = pluginConfig;
 	for (const step of steps) {
-		const { name, with: with_, if: if_, script, export: export_, uses, } = step;
+		const { name, with: with_, if: if_, script, export: export_, uses, silent } = step;
 		let jobPath: string;
 		// uses and script are mutually exclusive
 		if (uses) {
@@ -71,6 +75,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 			export: export_,
 			pipeline,
 			uses,
+			silent
 		} as IConfigBase);
 
 		await jobInstance.run();

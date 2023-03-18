@@ -14,6 +14,7 @@ export interface IConfigBase {
 		[key: string]: any;
 	}
 	uses?: string;
+	silent?: boolean;
 	pipeline: {
 		env: {
 			[key: string]: any;
@@ -29,6 +30,7 @@ export abstract class Base {
 	public export;
 	public pipeline;
 	public uses;
+	public silent;
 
 	constructor(args: IConfigBase) {
 		this.name = args.name;
@@ -38,6 +40,7 @@ export abstract class Base {
 		this.export = args.export;
 		this.uses = args.uses;
 		this.pipeline = args.pipeline;
+		this.silent = args.silent;
 	}
 
 	public execScript = async (
@@ -59,20 +62,18 @@ export abstract class Base {
 
 			process.stdout.on('data', (data) => {
 				stdout += data;
-				// logUpdate(stdout);
+				!this.silent && logUpdate(stdout);
 			});
 
 			process.stderr.on('data', (data) => {
 				stderr += data;
-				// logUpdate(data);
+				!this.silent && logUpdate(data);
 			});
 
 			process.on('close', (code) => {
 				if (code !== 0) {
 					reject(stderr);
 				}
-
-				console.log(stdout);
 
 				resolve({ code: 0, stdout, stderr });
 			});
@@ -92,10 +93,9 @@ export abstract class Base {
 
 	public async run() {
 		if (this.if) {
-			const result = await this.execIfCondition(this.if);
-			if (!result) {
-				process.exit(0);
-			}
+			return await this.execIfCondition(this.if);
 		}
+
+		return true;
 	}
 }

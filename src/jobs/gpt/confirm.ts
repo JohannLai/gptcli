@@ -8,7 +8,9 @@ export class Confirm extends Base {
 	}
 
 	public async run() {
-		super.run();
+		if (!await super.run()) {
+			return;
+		}
 
 		const { message } = this.with as {
 			message: string,

@@ -16,7 +16,9 @@ export class Chat extends Base {
 	}
 
 	public async run() {
-		super.run();
+		if (!await super.run()) {
+			return;
+		}
 
 		const AIEmoji = '👽';
 		const UserEmoji = '🫣';
@@ -38,7 +40,6 @@ export class Chat extends Base {
 				break;
 			}
 
-			// messages.push(chalk.blue(`${UserEmoji}: ${question}`));
 			messages.push("");
 
 			startLoading('AI is thinking ...');
