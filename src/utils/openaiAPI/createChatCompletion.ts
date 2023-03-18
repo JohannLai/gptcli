@@ -7,12 +7,6 @@ import { parseOpenAIStream } from "./parseOpenAIStream.js";
 export async function createChatCompletion(options: { [x: string]: any; messages?: { content: string; role: "user" | "assistant"; }[]; onMessage: (data: string) => void }) {
 	const { apiKey, onMessage, ...fetchOptions } = options;
 
-	// process on exit
-	process.on('exit', (err) => {
-		console.log(chalk.red(`Error: request openai error, ${err}`))
-		process.exit(1)
-	})
-
 	const response = await fetch(`${OPENAI_BASE_URL}/v1/chat/completions`, {
 		headers: {
 			'Content-Type': 'application/json',
