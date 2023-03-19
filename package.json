@@ -3,7 +3,7 @@
 	"version": "0.0.0-semantic-release",
 	"description": "",
 	"scripts": {
-		"postinstall": "node dist/scripts/createConfig.js",
+		"postinstall": "node scripts/createConfig.js",
 		"watch": "node scripts/watch.js",
 		"build": "node scripts/build",
 		"lint": "eslint --cache .",
@@ -84,7 +84,8 @@
 		"./jobs/gpt/createChatCompletion.js": "./dist/jobs/gpt/createChatCompletion.js"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"scripts"
 	],
 	"bin": {
 		"gpt": "./dist/cli.mjs",

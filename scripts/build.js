@@ -35,25 +35,3 @@ exec('npx pkgroll --minify', (err, stdout, stderr) => {
   }
   console.log(stdout)
 })
-
-// copy scripts/*.js to dist/scripts/*.js
-readdir('scripts', (err, files) => {
-  if (err) throw err
-  files.forEach((file) => {
-    if (file.endsWith('.js')) {
-      // to dist/scripts
-      const distPath = join('dist', 'scripts', file)
-      // from scripts
-      const srcPath = join('scripts', file)
-
-      if (!existsSync(join('dist', 'scripts'))) {
-        mkdirSync(join('dist', 'scripts'), { recursive: true })
-      }
-
-      _copyFile(srcPath, distPath, (err) => {
-        if (err) throw err
-        console.log(`${srcPath} was copied to ${distPath}`)
-      })
-    }
-  })
-})
