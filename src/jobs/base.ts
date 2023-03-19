@@ -76,7 +76,6 @@ export abstract class Base {
 				}
 
 				!this.silent && logUpdate(stdout)
-
 				resolve({ code: 0, stdout, stderr });
 			});
 		});
