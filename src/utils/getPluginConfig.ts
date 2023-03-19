@@ -34,13 +34,8 @@ export interface IPluginConfig {
 export const getPluginConfig = async (pluginName: string) => {
 	let pluginConfigFile = '';
 
-	// find the plugin config file in /src/plugins/${pluginName}.yml
-	// if not found, find the plugin config in PLUGINS_DIR
 	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
-	console.log('dirname ', dirname)
 	const srcConfigPath = path.join(dirname, 'plugins', `${pluginName}.yml`);
-	console.log('srcConfigPath', srcConfigPath)
-
 	const configPath = path.join(PLUGINS_DIR, pluginName, `${pluginName}.yml`);
 
 	try {
