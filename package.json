@@ -79,10 +79,11 @@
 	"author": "ZHIHANG LI",
 	"type": "module",
 	"exports": {
+		"./jobs/script.js": "./dist/jobs/script.js",
 		"./jobs/gpt/confirm.js": "./dist/jobs/gpt/confirm.js",
 		"./jobs/gpt/chat.js": "./dist/jobs/gpt/chat.js",
-		"./jobs/script.js": "./dist/jobs/script.js",
-		"./jobs/gpt/createChatCompletion.js": "./dist/jobs/gpt/createChatCompletion.js"
+		"./jobs/gpt/createChatCompletion.js": "./dist/jobs/gpt/createChatCompletion.js",
+		"./jobs/gpt/copyToClipboard.js": "./dist/jobs/gpt/copyToClipboard.js"
 	},
 	"files": [
 		"dist",

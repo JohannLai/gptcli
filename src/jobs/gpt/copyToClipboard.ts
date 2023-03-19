@@ -1,4 +1,5 @@
 import clipboardy from "clipboardy"
+import { replaceEnvVariables } from "../../utils/replaceEnvVariables.js";
 import { Base, IConfigBase } from '../base.js';
 
 /**
@@ -21,10 +22,17 @@ export class CopyToClipboard extends Base {
 			return;
 		}
 
+
 		const { text } = this.with as {
 			text: string,
 		};
 
-		clipboardy.writeSync(text);
+		const textWithEnv = replaceEnvVariables(
+			text, {
+			...process.env,
+			...this.pipeline.env,
+		});
+
+		clipboardy.writeSync(textWithEnv);
 	}
 }

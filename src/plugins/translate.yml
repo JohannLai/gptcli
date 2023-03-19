@@ -1,0 +1,41 @@
+name: translate
+description: "translate plugin for gpt cli"
+repository: "johannlai/gptcli"
+author: "johannlai"
+help: |
+  translate plugin for gpt cli
+
+  Usage:
+    ❯ gpt translate "add new feature to component" --to=zh
+    ❯ 添加新功能到组件
+
+env:
+  LANG: en
+steps:
+  - name: "get the destination language"
+    if: |
+      "$flag_to" != "undefined"
+    script: |
+      echo "::set-output name=LANG::$flag_to"
+    export:
+      LANG: LANG
+  - name: "ask ai to translate"
+    uses: "gpt:createChatCompletion"
+    with:
+      messages:
+        - role: "user"
+          content: "You are a translator. Translate a piece of text into $LANG without explanation. \n the origin text is $params_0"
+    export:
+      response_content: RESULT
+  - name: "ask if user want to copy the result"
+    uses: "gpt:confirm"
+    with:
+      message: "Would you like to copy above ⬆️ to clipboard ?"
+      default: true
+    export:
+      answer: ANSWER
+  - name: "copy to clipboard"
+    if: $ANSWER == true
+    uses: gpt:copyToClipboard
+    with:
+      text: $RESULT

@@ -42,7 +42,8 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 	})
 
 	Object.keys(unknownFlags).forEach((flag) => {
-		pipeline.env[`flag_${flag}}`] = String(unknownFlags[flag]);
+		// hack to get the first value of unknownFlags
+		pipeline.env[`flag_${flag}`] = String(unknownFlags[flag][0]);
 	})
 
 	optionalSpread.forEach((value, index) => {
