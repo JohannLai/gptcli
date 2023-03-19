@@ -18,13 +18,13 @@
 GPT CLI is a command-line interface tool that allows you to create your own ChatGPT CLI tools in seconds. It's as simple as creating a GitHub Actions workflow. With GPT CLI, you can customize your CLI tools to suit your needs and make your work more efficient.
 
 
-## Features
+## 🚀 Features
 
 - Create custom ChatGPT CLI tools in seconds
 - Customize your CLI tools to suit your needs
 - Easy to install and use
 
-## Installation
+## 🔧 Installation
 
 You can install GPT CLI using npm or brew:
 
@@ -40,7 +40,7 @@ npm install -g @johannlai/gptcli
 brew install johannlai/tap/gptcli
 ```
 
-## Built-in Plugins
+## 🧰 Built-in Plugins
 
 GPT CLI comes with a variety of built-in plugins to help you get started. Here's a table of the current built-in plugins:
 
@@ -54,8 +54,26 @@ GPT CLI comes with a variety of built-in plugins to help you get started. Here's
 | `cz`        | the `cz` plugin is the  [cz-cli](https://github.com/commitizen/cz-cli) plugin for ChatGPT. You can input the commit message, and cz plugin help you transform it into cz style(`fix: fix a bug`)                                                                                                                                                                                                                                                                                                                                                           |
 | `weather`   | The `weather` plugin allows users to check the weather in any city with Natural language,  it will generate a curl command to curl [wttr.in                                    ](https://github.com/chubin/wttr.in), and show the weather information in the terminal                                                                                                                                                                                                                                                                                      |
 
+### 📖 Help of built-in plugins
 
-## Configuration
+You can get help for each plugin by running the following command:
+
+```bash
+
+```bash
+# chat plugin
+gptcli chat help
+
+# command plugin
+gptcli command help
+```
+
+```bash
+
+
+## 🛠️ Configuration
+
+### User configuration
 🎉 Now! feel free to use MY OWN ChatGPT API KEY, but it's not recommended, because it's not stable, you can use your own API KEY, just follow the steps below:
 ```bash
 gptcli config user.OPENAI_API_KEY sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -78,7 +96,7 @@ gptcli config commit.style gitmoji
 ```
 
 
-## Community plugins
+## 👥 Community plugins
 
 Coming soon...
 
@@ -86,20 +104,20 @@ Will be displayed in the website :)
 
 For now, you can share your plugin with the community by submitting a pull request to add it to the list of community plugins. thanks! 👍
 
-## Customization, Build your own plugin in seconds 
+## 🎨 Customization, Build your own plugin in seconds
 
 To create your own CLI plugin, you can fork [this template repository](https://github.com/JohannLai/gptcli-plugin-template) and customize it to suit your needs. You can test your plugin locally and then install it globally using gptcli. For more information on how to create your own plugin, [please refer to the template repository.](https://github.com/JohannLai/gptcli-plugin-template)
 
 > Don't forget to share your plugin with the community by submitting a pull request to add it to the list of community plugins.
 
-## License
+## 📜 License
 
 GPT CLI is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
-## Other Information
+## 📋 Other Information
 
-For more information on how to use GPT CLI, please refer to the [wiki](https://github.com/myusername/gpt-cli/wiki).
+For more information on how to use GPT CLI, please refer to the [official website](https://gptcli.com).
 
 ---
 
-_Build by GitHub & ChatGPT with love_
+💻 _Build by GitHub & ChatGPT with ❤️_
