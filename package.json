@@ -3,7 +3,7 @@
 	"version": "0.0.0-semantic-release",
 	"description": "",
 	"scripts": {
-		"postinstall": "node scripts/createConfig.js",
+		"postinstall": "node dist/scripts/createConfig.js",
 		"watch": "node scripts/watch.js",
 		"build": "node scripts/build",
 		"lint": "eslint --cache .",
