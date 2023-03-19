@@ -32,7 +32,17 @@ export interface IPluginConfig {
 }
 
 export const getPluginConfig = async (pluginName: string) => {
-	let pluginConfigFile = '';
+	// if the pluginName is a path and  include a .yml file, then read the config from that file
+	// for local development and config file in the project directory
+	if (pluginName.includes('.yml')) {
+		// just use the pluginName as the path
+		const pluginConfigPath = pluginName;
+		const rawPluginConfig = await fs.readFile(pluginConfigPath, 'utf8')
+		return yaml.load(rawPluginConfig) as IPluginConfig;
+	}
+
+	// for the normal case
+	let rawPluginConfig = '';
 
 	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -40,17 +50,17 @@ export const getPluginConfig = async (pluginName: string) => {
 	const configPath = path.join(PLUGINS_DIR, pluginName, `${pluginName}.yml`);
 
 	try {
-		pluginConfigFile = await fs.readFile(srcConfigPath, 'utf8');
+		rawPluginConfig = await fs.readFile(srcConfigPath, 'utf8');
 	} catch (error) {
 		// If the config file doesn't exist in the source directory, try to read it from the plugins directory
 		try {
-			pluginConfigFile = await fs.readFile(configPath, 'utf8');
+			rawPluginConfig = await fs.readFile(configPath, 'utf8');
 		} catch (error) {
-			throw new Error(`Plugin config file not found: ${pluginName}`);
+			throw new Error(`Plugin config file not found: ${pluginName}, I tried to read it from ${srcConfigPath} and ${configPath}`);
 		}
 	}
 
-	const pluginConfig = yaml.load(pluginConfigFile);
+	const pluginConfig = yaml.load(rawPluginConfig);
 	return pluginConfig as IPluginConfig;
 };
 
