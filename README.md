@@ -1,7 +1,7 @@
 <div align="center">
   <div>
-    <img src=".github/screenshot.png" alt="GPTCLI"/>
-    <h1 align="center">GPT CLI </h1>
+    <img src=".github/icon.png" alt="GPTCLI" width="200"/>
+    <h1 align="center">GPT CLI</h1>
   </div>
 	<p>All in one ChatGPT CLI, build your own AI cli tools just like GitHub Actions workflow</p>
 	<p>With GPT CLI, you can customize your CLI tools to suit your needs and make your work more efficient.</p>
