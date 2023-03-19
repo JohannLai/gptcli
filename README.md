@@ -34,7 +34,7 @@ To run this CLI tool, you need to have Node.js version 18 or higher installed on
 npm install -g @johannlai/gptcli
 ```
 
-### brew
+### brew(WIP)
 
 ```bash
 brew install johannlai/tap/gptcli
