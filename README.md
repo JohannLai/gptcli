@@ -1,6 +1,6 @@
 <div align="center">
   <div>
-    <img src=".github/screenshot.png" alt="AI Commits"/>
+    <img src=".github/screenshot.png" alt="GPTCLI"/>
     <h1 align="center">GPT CLI</h1>
   </div>
 	<p>Create your own ChatGPT CLI tools in seconds, just like GitHub Actions workflow</p>
