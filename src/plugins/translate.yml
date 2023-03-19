@@ -9,6 +9,12 @@ help: |
     ❯ gpt translate "add new feature to component" --to=zh
     ❯ 添加新功能到组件
 
+    ❯ gpt translate "add new feature to component" --to=ja
+    ❯ コンポーネントに新機能を追加する
+
+    ❯ gpt translate "add new feature to component" --to=ko
+    ❯ 컴포넌트에 새 기능 추가
+
 env:
   LANG: en
 steps:
