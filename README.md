@@ -19,7 +19,7 @@ GPT CLI is a command-line interface tool that allows you to create your own Chat
 
 
 ## 🚀 Features
-
+- All in one ChatGPT CLI
 - Create custom ChatGPT CLI tools in seconds
 - Customize your CLI tools to suit your needs
 - Easy to install and use
