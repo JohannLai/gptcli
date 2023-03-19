@@ -60,6 +60,8 @@ Coming soon...
 
 Will be displayed in the website :)
 
+For now, you can share your plugin with the community by submitting a pull request to add it to the list of community plugins. thanks! 👍
+
 ## Customization
 
 To create your own CLI plugin, you can fork [this template repository](https://github.com/JohannLai/gptcli-plugin-template) and customize it to suit your needs. You can test your plugin locally and then install it globally using gptcli. For more information on how to create your own plugin, [please refer to the template repository.](https://github.com/JohannLai/gptcli-plugin-template)
