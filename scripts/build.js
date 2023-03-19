@@ -10,7 +10,6 @@ if (!existsSync(distDir)) {
   mkdirSync(distDir, { recursive: true })
 }
 
-// 处理文件复制操作
 function copyFile(filePath) {
   const srcPath = filePath
   const distPath = join(distDir, basename(filePath))
@@ -20,7 +19,6 @@ function copyFile(filePath) {
   })
 }
 
-// 获取源文件夹中的 yml 文件列表
 readdir(srcDir, (err, files) => {
   if (err) throw err
   files.forEach((file) => {
@@ -30,7 +28,15 @@ readdir(srcDir, (err, files) => {
   })
 })
 
-// exec command npx pkgroll --minify
+// copy scripts/*.js to dist
+readdir('scripts', (err, files) => {
+  if (err) throw err
+  files.forEach((file) => {
+    if (file.endsWith('.js')) {
+      copyFile(join('scripts', file))
+    }
+  })
+})
 
 exec('npx pkgroll --minify', (err, stdout, stderr) => {
   if (err) {
