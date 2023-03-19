@@ -5,7 +5,8 @@
   </div>
 	<p>All in one ChatGPT CLI, build your own AI cli tools just like GitHub Actions workflow</p>
 	<p>With GPT CLI, you can customize your CLI tools to suit your needs and make your work more efficient.</p>
-	<p>秒级创建任意自定义 ChatGPT CLI 工具，就像创建一个 GitHub Actions 这么简单。</p>
+	<p>Convert NATURAL LANGUAGE PROCESSING (NLP) to into structured data. </p>
+	<p>秒级创建任意自定义 ChatGPT CLI 工具，就像创建一个 GitHub Actions 这么简单，让 AI 帮助我们链接自然语言和结构化数据</p>
 	<a href="https://www.npmjs.com/package/@johannlai/gptcli"><img src="https://img.shields.io/npm/v/@johannlai/gptcli" alt="Current version"></a>
 	<a href="https://github.com/semantic-release/semantic-release">
 	<img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
@@ -55,6 +56,7 @@ GPT CLI comes with a variety of built-in plugins to help you get started. Here's
 | `gitmoji`   | The gitmoji plugin allows users to generate Git commit messages in the [gitmoji](https://gitmoji.dev/) format by using the command "gptcli gitmoji" followed by a brief description of the commit, such as "fix a bug". This plugin utilizes emojis to provide visual representations of the type of commit being made(e.g: `🐛 fix a bug`), making it easier for users to categorize and understand the purpose of each commit.  🎉🚀👍                                                                                                                       | `gptcli gitmoji "fix a bug"`                           |
 | `cz`        | the `cz` plugin is the  [cz-cli](https://github.com/commitizen/cz-cli) plugin for ChatGPT. You can input the commit message, and cz plugin help you transform it into cz style(`fix: fix a bug`)                                                                                                                                                                                                                                                                                                                                                           | `gptcli cz "fix a bug"`                                |
 | `weather`   | The `weather` plugin allows users to check the weather in any city with Natural language,  it will generate a curl command to curl [wttr.in                                    ](https://github.com/chubin/wttr.in), and show the weather information in the terminal                                                                                                                                                                                                                                                                                      | `gptcli weather "Hongkong weather"`                    |
+| `notion`    | The `notion` plugin is WIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `gptcli notion create xxx`                             |
 
 
 ### Help of built-in plugins
