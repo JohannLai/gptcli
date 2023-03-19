@@ -54,6 +54,30 @@ GPT CLI comes with a variety of built-in plugins to help you get started. Here's
 | `cz`        | the `cz` plugin is the  [cz-cli](https://github.com/commitizen/cz-cli) plugin for ChatGPT. You can input the commit message, and cz plugin help you transform it into cz style(`fix: fix a bug`)                                                                                                                                                                                                                                                                                                                                                           |
 | `weather`   | The `weather` plugin allows users to check the weather in any city with Natural language,  it will generate a curl command to curl [wttr.in                                    ](https://github.com/chubin/wttr.in), and show the weather information in the terminal                                                                                                                                                                                                                                                                                      |
 
+
+## Configuration
+🎉 Now! feel free to use MY OWN ChatGPT API KEY, but it's not recommended, because it's not stable, you can use your own API KEY, just follow the steps below:
+```bash
+gptcli config user.OPENAI_API_KEY sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+> You can get your own API KEY from [OpenAI](https://platform.openai.com/account/api-keys/)
+
+### To configure the plugin
+Some plugins require additional configuration to work properly. For example, the `commit` plugin requires a commit style to be specified. To configure the plugin, you can use the `gptcli config` command. For example, to configure the `commit` plugin to use the `cz` commit style, you can run the following command:
+
+```bash
+# cz style: fix: fix a bug
+gptcli config commit.style cz
+```
+
+or gitmoji style:
+
+```bash
+# gitmoji style: 🐛 fix a bug
+gptcli config commit.style gitmoji
+```
+
+
 ## Community plugins
 
 Coming soon...
@@ -62,12 +86,11 @@ Will be displayed in the website :)
 
 For now, you can share your plugin with the community by submitting a pull request to add it to the list of community plugins. thanks! 👍
 
-## Customization
+## Customization, Build your own plugin in seconds 
 
 To create your own CLI plugin, you can fork [this template repository](https://github.com/JohannLai/gptcli-plugin-template) and customize it to suit your needs. You can test your plugin locally and then install it globally using gptcli. For more information on how to create your own plugin, [please refer to the template repository.](https://github.com/JohannLai/gptcli-plugin-template)
 
 > Don't forget to share your plugin with the community by submitting a pull request to add it to the list of community plugins.
-
 
 ## License
 
