@@ -1,11 +1,13 @@
 import { cli } from 'cleye'
 import { run } from "./run.js"
 import chalk from 'chalk';
+import * as url from 'url'
 import { getPluginConfig } from './utils/getPluginConfig.js';
 import { getConfigFromGptrc, setConfigToGptrc } from './utils/gptrc.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 import { getPackageVersion } from './utils/getPackageJson.js';
+import { PLUGINS_DIR } from './constants.js';
 
 const version = await getPackageVersion();
 
@@ -41,12 +43,19 @@ const { plugin, optionalSpread } = argv._;
 
 // List all plugins
 if (argv._[0] == 'list') {
-	const plugins = readdirSync(join(process.cwd(), 'plugins')).map((plugin) => plugin.replace('.yml', ''));
-	console.log(plugins)
+	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
+
+	const builtInPlugins = readdirSync(join(dirname, 'plugins')).map((plugin) => plugin.replace('.yml', ''));
 
 	console.log(`
-	${chalk.underline('Available Official plugins')}
-	${plugins.join('\n')}
+	${chalk.reset('\n ✨ Built-in Plugins\n   🕹️ ')}${builtInPlugins.join('\n   🕹️ ')}
+	`);
+
+	// get all  folders in plugins dir
+	const InstalledPlugins = readdirSync(PLUGINS_DIR)
+
+	console.log(`
+	${chalk.reset('\n ✨ Installed Plugins\n   🕹️ ')}${InstalledPlugins.join('\n   🕹️ ')}
 	`);
 
 	process.exit(0);
