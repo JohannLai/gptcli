@@ -67,15 +67,15 @@ export abstract class Base {
 
 			process.stderr.on('data', (data) => {
 				stderr += data;
-				!this.silent && console.log(chalk.red(data));
 			});
 
 			process.on('close', (code) => {
 				if (code !== 0) {
+					!this.silent && console.log(chalk.red(stderr));
 					reject(stderr);
 				}
 
-				logUpdate(stdout)
+				!this.silent && logUpdate(stdout)
 
 				resolve({ code: 0, stdout, stderr });
 			});
