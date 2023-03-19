@@ -23,7 +23,7 @@ const argv = cli({
 
 	help: {
 		version: `🔥 v${version}`,
-		description: '✨ Build any CLI with AI in seconds',
+		description: '✨ ALL IN ONE CLI for ChatGPT command line tool',
 		usage: [
 			'👉 gpt <plugin> [optional spread...]',
 			'👉 gpt list',
