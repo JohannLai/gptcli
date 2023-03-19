@@ -54,13 +54,18 @@ GPT CLI comes with a variety of built-in plugins to help you get started. Here's
 | `cz`        | the `cz` plugin is the  [cz-cli](https://github.com/commitizen/cz-cli) plugin for ChatGPT. You can input the commit message, and cz plugin help you transform it into cz style(`fix: fix a bug`)                                                                                                                                                                                                                                                                                                                                                           |
 | `weather`   | The `weather` plugin allows users to check the weather in any city with Natural language,  it will generate a curl command to curl [wttr.in                                    ](https://github.com/chubin/wttr.in), and show the weather information in the terminal                                                                                                                                                                                                                                                                                      |
 
+## Community plugins
+
+Coming soon...
+
+Will be displayed in the website :)
+
 ## Customization
 
-To create your own CLI plugin, you can use the `gpt-cli-plugin` command. Here's an example:
+To create your own CLI plugin, you can fork this template repository and customize it to suit your needs. You can test your plugin locally and then install it globally using gptcli. For more information on how to create your own plugin, please refer to the template repository.
 
+> Don't forget to share your plugin with the community by submitting a pull request to add it to the list of community plugins.
 
-
-This will create a new plugin called `my-plugin`. You can then customize the plugin to suit your needs.
 
 ## License
 
