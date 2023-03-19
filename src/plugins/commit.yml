@@ -73,5 +73,6 @@ steps:
     export:
       answer: ANSWER
   - name: "execute the command"
+    if: $ANSWER == true
     script: |
       $COMMAND
