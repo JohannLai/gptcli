@@ -117,6 +117,37 @@ To create your own CLI plugin, you can fork [this template repository](https://g
 
 > Don't forget to share your plugin with the community by submitting a pull request to add it to the list of community plugins.
 
+
+### It's easy to build your own plugin, just one YAML file
+
+```yaml
+name: joke
+description: "joke plugin for gpt cli"
+repository: "johannlai/joke"
+author: "johannlai"
+help: |
+  joke plugin for gpt cli
+  Usage:
+    ❯ gpt joke
+    ❯ "Why did the tomato turn red? Because it saw the salad dressing!"
+steps:
+  - name: "ask ai to output joke"
+    # use the gpt:createChatCompletion action to create a chat completion
+    uses: "gpt:createChatCompletion"
+    with:
+      messages:
+        - role: "user"
+          content: "tell me a joke"
+    export:
+      # export the response content to the JOKE environment variable
+      response_content: JOKE
+  - name: "output response"
+    # output the JOKE environment variable
+    script: |
+      echo $JOKE
+```
+For more information, please refer to the [template repository](https://github.com/JohannLai/gptcli-plugin-template)
+
 ## 📜 License
 
 GPT CLI is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
