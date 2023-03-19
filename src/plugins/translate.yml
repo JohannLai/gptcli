@@ -19,6 +19,7 @@ env:
   LANG: en
 steps:
   - name: "get the destination language"
+    silent: true
     if: |
       "$flag_to" != "undefined"
     script: |
