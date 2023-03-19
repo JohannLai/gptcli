@@ -35,6 +35,7 @@ export const getPluginConfig = async (pluginName: string) => {
 	let pluginConfigFile = '';
 
 	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
+
 	const srcConfigPath = path.join(dirname, 'plugins', `${pluginName}.yml`);
 	const configPath = path.join(PLUGINS_DIR, pluginName, `${pluginName}.yml`);
 
