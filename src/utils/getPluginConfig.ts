@@ -37,9 +37,9 @@ export const getPluginConfig = async (pluginName: string) => {
 	// find the plugin config file in /src/plugins/${pluginName}.yml
 	// if not found, find the plugin config in PLUGINS_DIR
 	const dirname = url.fileURLToPath(new URL('.', import.meta.url))
-	const srcConfigPath = path.join(dirname, "..", 'src', 'plugins', `${pluginName}.yml`);
+	const srcConfigPath = path.join(dirname, 'plugins', `${pluginName}.yml`);
 
-	const configPath = path.join(PLUGINS_DIR, `${pluginName}.yml`);
+	const configPath = path.join(PLUGINS_DIR, pluginName, `${pluginName}.yml`);
 
 	try {
 		pluginConfigFile = await fs.readFile(srcConfigPath, 'utf8');
