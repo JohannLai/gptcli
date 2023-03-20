@@ -39,9 +39,10 @@ export async function run(pluginConfig: IPluginConfig, argv: {
     pipeline.env[key] = scopesConfig[key];
   })
 
-  // hack OPENAI_API_KEY for free use
   if (!pipeline.env.OPENAI_API_KEY) {
-    console.log(chalk.yellow(`
+    // hack OPENAI_API_KEY  0.3 show warning for free key
+    Math.random() < 0.3 &&
+      console.log(chalk.yellow(`
 ⚠️  OPENAI_API_KEY not found, using free key(not stable)
 please set your own key by:
 gptcli config user.OPENAI_API_KEY sk-xxx
