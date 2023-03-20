@@ -22,6 +22,9 @@
 
 GPT CLI is a command-line interface tool that allows you to create your own ChatGPT CLI tools in seconds. It's as simple as creating a GitHub Actions workflow. With GPT CLI, you can customize your CLI tools to suit your needs and make your work more efficient.
 
+> **Note:** ALL the commit message is wrote by this plugin, awesome!
+>
+
 <img src=".github/commit.gif" alt="commit-plugins" style="border-radius: 20px">
 
 
