@@ -8,7 +8,7 @@
 	<p>Convert NATURAL LANGUAGE PROCESSING (NLP) to into structured data. </p>
 	<p>秒级创建任意自定义 ChatGPT CLI 工具，就像创建一个 GitHub Actions 这么简单，让 AI 帮助我们链接自然语言和结构化数据</p>
 	<a href="https://www.npmjs.com/package/@johannlai/gptcli"><img src="https://img.shields.io/npm/v/@johannlai/gptcli" alt="Current version"></a>
-	<a href="">
+	<a href="https://www.npmjs.com/package/@johannlai/gptcli">
 	<img src="https://img.shields.io/npm/dm/@johannlai/gptcli">
 	</a>
 	<a href="https://github.com/semantic-release/semantic-release">
