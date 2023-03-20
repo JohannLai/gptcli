@@ -12,47 +12,47 @@ export type IMessages = Array<{
 }>
 
 export class CreateChatCompletion extends Base {
-	constructor(args: IConfigBase) {
-		super(args);
-	}
+  constructor(args: IConfigBase) {
+    super(args);
+  }
 
-	public async run() {
-		if (!await super.run()) {
-			return;
-		}
+  public async run() {
+    if (!await super.run()) {
+      return;
+    }
 
-		!this.silent && startLoading('AI is thinking ...');
+    !this.silent && startLoading('AI is thinking ...');
 
-		const { messages } = this.with as { messages: IMessages };
-		const messagesWithEnv = messages.map((item) => {
-			return {
-				...item,
-				content: replaceEnvVariables(
-					item.content, {
-					...process.env,
-					...this.pipeline.env,
-				})
-			}
-		});
+    const { messages } = this.with as { messages: IMessages };
+    const messagesWithEnv = messages.map((item) => {
+      return {
+        ...item,
+        content: replaceEnvVariables(
+          item.content, {
+            ...process.env,
+            ...this.pipeline.env,
+          })
+      }
+    });
 
-		const apiKey = this.pipeline.env.OPENAI_API_KEY;
+    const apiKey = this.pipeline.env.OPENAI_API_KEY;
 
-		const data = await createChatCompletion({
-			apiKey,
-			messages: messagesWithEnv,
-			onMessage: (message) => {
-				stopLoading();
-				!this.silent && logUpdate(chalk.green('❯', message));
-			}
-		})
+    const data = await createChatCompletion({
+      apiKey,
+      messages: messagesWithEnv,
+      onMessage: (message) => {
+        stopLoading();
+        !this.silent && logUpdate(chalk.green('❯', message));
+      }
+    })
 
-		if (!data) {
-			console.log(chalk.red(this.name + 'Error: no data'));
-			process.exit(1);
-		}
+    if (!data) {
+      console.log(chalk.red(this.name + 'Error: no data'));
+      process.exit(1);
+    }
 
-		if (this?.export?.response_content) {
-			this.pipeline.env[this.export.response_content] = data;
-		}
-	}
+    if (this?.export?.response_content) {
+      this.pipeline.env[this.export.response_content] = data;
+    }
+  }
 }

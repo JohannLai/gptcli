@@ -10,53 +10,53 @@ import { CONFIG_FILE_PATH } from '../constants.js';
 // token = 123
 
 type scopeConfig = {
-	[key: string]: string;
+  [key: string]: string;
 };
 
 type config = {
-	[scope: string]: scopeConfig;
+  [scope: string]: scopeConfig;
 };
 
 export function getAllConfigFromGptrc() {
-	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
-	const configObject = ini.parse(config);
-	return configObject;
+  const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
+  const configObject = ini.parse(config);
+  return configObject;
 }
 
 export function getConfigFromGptrc(scope: string, key: string) {
-	const configObject = getAllConfigFromGptrc()
-	return configObject?.[scope]?.[key];
+  const configObject = getAllConfigFromGptrc()
+  return configObject?.[scope]?.[key];
 }
 
 export function setConfigToGptrc(scope: string, key: string, value: string) {
-	const allConfig = getAllConfigFromGptrc();
-	const configObject: config = {
-		...allConfig,
-		[scope]: {
-			...allConfig[scope],
-			[key]: value,
-		},
-	};
+  const allConfig = getAllConfigFromGptrc();
+  const configObject: config = {
+    ...allConfig,
+    [scope]: {
+      ...allConfig[scope],
+      [key]: value,
+    },
+  };
 
-	const configString = ini.stringify(configObject);
-	fs.writeFileSync(CONFIG_FILE_PATH, configString);
+  const configString = ini.stringify(configObject);
+  fs.writeFileSync(CONFIG_FILE_PATH, configString);
 }
 
 export function getScopeConfig(scope: string) {
-	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
-	const configObject = ini.parse(config);
-	return configObject[scope];
+  const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
+  const configObject = ini.parse(config);
+  return configObject[scope];
 }
 
 // get multiple scopes config, e.g: ['user', 'gitmoji']
 // last scope config will override the previous one
 export function getScopesConfig(scopes: string[]): scopeConfig {
-	const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
-	const configObject = ini.parse(config);
-	let result: scopeConfig = {};
-	scopes.forEach((scope) => {
-		result = { ...result, ...configObject[scope] };
-	});
+  const config = fs.readFileSync(CONFIG_FILE_PATH, 'utf8');
+  const configObject = ini.parse(config);
+  let result: scopeConfig = {};
+  scopes.forEach((scope) => {
+    result = { ...result, ...configObject[scope] };
+  });
 
-	return result;
+  return result;
 }

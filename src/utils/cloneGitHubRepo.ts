@@ -11,11 +11,11 @@ const execPromise = util.promisify(exec);
  * @returns {string} - The path of the cloned repository
  */
 export async function cloneGitHubRepo(repoPath: string) {
-	if (!repoPath) throw new Error('repoPath is required');
-	const repoUrl = `https://github.com/${repoPath}.git`;
+  if (!repoPath) throw new Error('repoPath is required');
+  const repoUrl = `https://github.com/${repoPath}.git`;
 
-	await fs.mkdir(PLUGINS_DIR, { recursive: true });
-	await execPromise(`git clone ${repoUrl} ${PLUGINS_DIR}`);
+  await fs.mkdir(PLUGINS_DIR, { recursive: true });
+  await execPromise(`git clone ${repoUrl} ${PLUGINS_DIR}`);
 
-	return `${PLUGINS_DIR}/${repoPath.split('/')[1]}`
+  return `${PLUGINS_DIR}/${repoPath.split('/')[1]}`
 }

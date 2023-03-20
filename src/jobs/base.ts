@@ -23,80 +23,80 @@ export interface IConfigBase {
 }
 
 export abstract class Base {
-	public name;
-	public with;
-	public if?;
-	public script;
-	public export;
-	public pipeline;
-	public uses;
-	public silent;
+  public name;
+  public with;
+  public if?;
+  public script;
+  public export;
+  public pipeline;
+  public uses;
+  public silent;
 
-	constructor(args: IConfigBase) {
-		this.name = args.name;
-		this.with = args.with;
-		this.if = args.if;
-		this.script = args.script;
-		this.export = args.export;
-		this.uses = args.uses;
-		this.pipeline = args.pipeline;
-		this.silent = args.silent;
-	}
+  constructor(args: IConfigBase) {
+    this.name = args.name;
+    this.with = args.with;
+    this.if = args.if;
+    this.script = args.script;
+    this.export = args.export;
+    this.uses = args.uses;
+    this.pipeline = args.pipeline;
+    this.silent = args.silent;
+  }
 
-	public execScript = async (
-		script: string,
-	): Promise<{ code: number; stdout: string; stderr: string }> => {
-		const scriptWithEnv = replaceEnvVariables(script, {
-			...process.env,
-			...this.pipeline.env,
-		});
+  public execScript = async (
+    script: string,
+  ): Promise<{ code: number; stdout: string; stderr: string }> => {
+    const scriptWithEnv = replaceEnvVariables(script, {
+      ...process.env,
+      ...this.pipeline.env,
+    });
 
-		return new Promise((resolve, reject) => {
-			const process = spawn(scriptWithEnv, {
-				shell: true,
-				stdio: 'pipe',
-			});
+    return new Promise((resolve, reject) => {
+      const process = spawn(scriptWithEnv, {
+        shell: true,
+        stdio: 'pipe',
+      });
 
-			let stdout = '';
-			let stderr = '';
+      let stdout = '';
+      let stderr = '';
 
-			process.stdout.on('data', (data) => {
-				stdout += data;
-				!this.silent && logUpdate(stdout);
-			});
+      process.stdout.on('data', (data) => {
+        stdout += data;
+        !this.silent && logUpdate(stdout);
+      });
 
-			process.stderr.on('data', (data) => {
-				stderr += data;
-			});
+      process.stderr.on('data', (data) => {
+        stderr += data;
+      });
 
-			process.on('close', (code) => {
-				if (code !== 0) {
-					!this.silent && console.log(chalk.red(stderr));
-					reject(stderr);
-				}
+      process.on('close', (code) => {
+        if (code !== 0) {
+          !this.silent && console.log(chalk.red(stderr));
+          reject(stderr);
+        }
 
-				!this.silent && logUpdate(stdout)
-				resolve({ code: 0, stdout, stderr });
-			});
-		});
-	}
+        !this.silent && logUpdate(stdout)
+        resolve({ code: 0, stdout, stderr });
+      });
+    });
+  }
 
-	private execIfCondition = async (condition: string) => {
-		const ifWithEnv = replaceEnvVariables(condition, this.pipeline.env);
+  private execIfCondition = async (condition: string) => {
+    const ifWithEnv = replaceEnvVariables(condition, this.pipeline.env);
 
-		try {
-			return eval(`Boolean(${ifWithEnv})`);
-		} catch (e) {
-			console.error('Error occurred while running the if statement:', e);
-			return false;
-		}
-	}
+    try {
+      return eval(`Boolean(${ifWithEnv})`);
+    } catch (e) {
+      console.error('Error occurred while running the if statement:', e);
+      return false;
+    }
+  }
 
-	public async run() {
-		if (this.if) {
-			return await this.execIfCondition(this.if);
-		}
+  public async run() {
+    if (this.if) {
+      return await this.execIfCondition(this.if);
+    }
 
-		return true;
-	}
+    return true;
+  }
 }
