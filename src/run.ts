@@ -3,6 +3,7 @@ import { Renderers } from "cleye";
 import { IConfigBase } from "./jobs/base.js";
 import { IPluginConfig } from "./utils/getPluginConfig.js";
 import { getScopesConfig } from './utils/gptrc.js';
+import { getFreeOpenaiKey } from "./utils/openaiAPI/getFreeOpenaiKey.js";
 
 export interface IPipeline {
 	env: {
@@ -27,7 +28,6 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 		config: pluginConfig,
 	};
 
-
 	// replace plugin env variables
 	pluginConfig.env && Object.keys(pluginConfig.env).forEach((key) => {
 		pipeline.env[key] = pluginConfig.env[key]
@@ -38,6 +38,16 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 	Object.keys(scopesConfig).forEach((key) => {
 		pipeline.env[key] = scopesConfig[key];
 	})
+
+	// hack OPENAI_API_KEY for free use
+	if (!pipeline.env.OPENAI_API_KEY) {
+		console.log(chalk.yellow(`
+⚠️  OPENAI_API_KEY not found, using free key(not stable)
+please set your own key by:
+gptcli config user.OPENAI_API_KEY sk-xxx
+`))
+		pipeline.env.OPENAI_API_KEY = getFreeOpenaiKey()
+	}
 
 	Object.keys(unknownFlags).forEach((flag) => {
 		// hack to get the first value of unknownFlags
