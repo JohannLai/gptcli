@@ -101,6 +101,7 @@
 		"@semantic-release/npm": "^9.0.2",
 		"@semantic-release/release-notes-generator": "^10.0.3",
 		"@trivago/prettier-plugin-sort-imports": "^4.1.1",
+		"@types/readable-stream": "^2.3.15",
 		"@typescript-eslint/eslint-plugin": "^5.54.1",
 		"@typescript-eslint/parser": "^5.54.1",
 		"assert": "^2.0.0",
@@ -138,6 +139,8 @@
 		"openai": "^3.2.1",
 		"ora": "^6.1.2",
 		"read-pkg-up": "^9.1.0",
-		"undici": "^5.21.0"
+		"readable-stream": "^3.6.2",
+		"undici": "^5.21.0",
+		"web-streams-polyfill": "^3.2.1"
 	}
 }

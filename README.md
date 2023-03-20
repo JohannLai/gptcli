@@ -39,7 +39,8 @@ GPT CLI is a command-line interface tool that allows you to create your own Chat
 You can install GPT CLI using npm or brew:
 
 ### npm
-To run this CLI tool, you need to have **Node.js version 18** or higher installed on your system. Additionally, you need to have npm version 8.x or higher installed as well.
+To run this CLI tool, you need to have [**Node.js version 16+ **](https://nodejs.org/en), recommended to use [nvm](https://github.com/nvm-sh/nvm) to manage node version.
+
 ```bash
 npm install -g @johannlai/gptcli
 ```
