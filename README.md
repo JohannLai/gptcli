@@ -9,7 +9,7 @@
 	<p>秒级创建任意自定义 ChatGPT CLI 工具，就像创建一个 GitHub Actions 这么简单，让 AI 帮助我们链接自然语言和结构化数据</p>
 	<a href="https://www.npmjs.com/package/@johannlai/gptcli"><img src="https://img.shields.io/npm/v/@johannlai/gptcli" alt="Current version"></a>
 	<a href="https://www.npmjs.com/package/@johannlai/gptcli">
-	<img src="https://img.shields.io/npm/dm/@johannlai/gptcli">
+	<img src="https://img.shields.io/npm/dw/@johannlai/gptcli">
 	</a>
 	<a href="https://github.com/semantic-release/semantic-release">
 	<img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
