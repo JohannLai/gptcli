@@ -8,7 +8,7 @@
 		"build": "node scripts/build",
 		"lint": "eslint --cache .",
 		"type-check": "tsc",
-		"test": "vitest",
+		"test": "vitest run",
 		"prepack": "node scripts/build && clean-pkg-json"
 	},
 	"keywords": [
