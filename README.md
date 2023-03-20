@@ -157,6 +157,9 @@ GPT CLI is licensed under the MIT License. See the [LICENSE](LICENSE) file for m
 
 For more information on how to use GPT CLI, please refer to the [official website](https://gptcli.com).
 
+## Issues
+Ask questions, report bugs, and request features on the [GitHub issues page](https://github.com/JohannLai/gptcli/issues)
+
 ---
 
 💻 _Build by GitHub & ChatGPT with ❤️_
