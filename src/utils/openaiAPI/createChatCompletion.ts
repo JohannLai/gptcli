@@ -22,8 +22,6 @@ export async function createChatCompletion(options: { [x: string]: any; messages
     throw err
   });
 
-  // const streamRes = new Response(parseOpenAIStream(response))
-
   if (!response?.ok) {
     console.log(chalk.red(`Error: request openai error, ${response.statusText}`))
     process.exit(1)
