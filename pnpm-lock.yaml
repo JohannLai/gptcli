@@ -11,6 +11,7 @@ specifiers:
   '@types/inquirer': ^9.0.3
   '@types/js-yaml': ^4.0.5
   '@types/node': ^18.15.0
+  '@types/readable-stream': ^2.3.15
   '@typescript-eslint/eslint-plugin': ^5.54.1
   '@typescript-eslint/parser': ^5.54.1
   ansi-regex: ^6.0.1
@@ -36,12 +37,14 @@ specifiers:
   pkgroll: ^1.9.0
   prettier: ^2.8.4
   read-pkg-up: ^9.1.0
+  readable-stream: ^3.6.2
   semantic-release: ^20.1.1
   semantic-release-gitmoji: ^1.6.3
   simple-git-hooks: ^2.8.1
   typescript: ^4.9.5
   undici: ^5.21.0
   vitest: ^0.29.2
+  web-streams-polyfill: ^3.2.1
 
 dependencies:
   '@dqbd/tiktoken': 0.4.0
@@ -65,7 +68,9 @@ dependencies:
   openai: 3.2.1
   ora: 6.1.2
   read-pkg-up: 9.1.0
+  readable-stream: 3.6.2
   undici: 5.21.0
+  web-streams-polyfill: 3.2.1
 
 devDependencies:
   '@semantic-release/commit-analyzer': 9.0.2_semantic-release@20.1.1
@@ -73,6 +78,7 @@ devDependencies:
   '@semantic-release/npm': 9.0.2_semantic-release@20.1.1
   '@semantic-release/release-notes-generator': 10.0.3_semantic-release@20.1.1
   '@trivago/prettier-plugin-sort-imports': 4.1.1_prettier@2.8.4
+  '@types/readable-stream': 2.3.15
   '@typescript-eslint/eslint-plugin': 5.54.1_4rfaf6mlw2mmutqjcopwvbftpu
   '@typescript-eslint/parser': 5.54.1_vgl77cfdswitgr47lm5swmv43m
   assert: 2.0.0
@@ -1140,6 +1146,13 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+
+  /@types/readable-stream/2.3.15:
+    resolution: {integrity: sha512-oM5JSKQCcICF1wvGgmecmHldZ48OZamtMxcGGVICOJA8o8cahXC1zEVAif8iwoc5j8etxFaRFnf095+CDsuoFQ==}
+    dependencies:
+      '@types/node': 18.15.0
+      safe-buffer: 5.1.2
+    dev: true
 
   /@types/resolve/1.20.2:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -4969,6 +4982,11 @@ packages:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
     dependencies:
       defaults: 1.0.4
+    dev: false
+
+  /web-streams-polyfill/3.2.1:
+    resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
+    engines: {node: '>= 8'}
     dev: false
 
   /webidl-conversions/3.0.1:

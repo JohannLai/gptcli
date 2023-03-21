@@ -1,4 +1,5 @@
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
+import { Response } from 'undici'
 
 export function parseOpenAIStream(rawResponse: Response) {
   const encoder = new TextEncoder()
