@@ -3,7 +3,6 @@ import { readPackageUp } from 'read-pkg-up'
 
 export const getPackageVersion = async () => {
   const dirname = url.fileURLToPath(new URL('.', import.meta.url))
-  console.log(dirname)
   const pkg = await readPackageUp({ cwd: dirname })
   const packageJson = pkg?.packageJson
   if (!packageJson) {
