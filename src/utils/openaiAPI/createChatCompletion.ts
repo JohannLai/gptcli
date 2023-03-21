@@ -1,9 +1,7 @@
 import chalk from "chalk";
-import { fetch, Response, ProxyAgent } from 'undici'
+import { fetch } from 'undici'
 import { OPENAI_BASE_URL } from "../../constants.js";
-import { parseOpenAIStream } from "./parseOpenAIStream.js";
-import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
-import { streamAsyncIterable } from './stream-async-iterable.js'
+import { createParser } from 'eventsource-parser'
 
 export async function createChatCompletion(options: { [x: string]: any; messages?: { content: string; role: "user" | "assistant"; }[]; onMessage: (data: string) => void }) {
   const { apiKey, onMessage, ...fetchOptions } = options;
