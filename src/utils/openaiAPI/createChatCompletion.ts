@@ -23,7 +23,7 @@ export async function createChatCompletion(options: { [x: string]: any; messages
   });
 
   if (!response?.ok) {
-    console.log(chalk.red(`Error: request openai error, ${response.statusText}`))
+    console.log(chalk.red(`Error: request openai error, ${response.status} ,${response.statusText}`))
     process.exit(1)
   }
 
