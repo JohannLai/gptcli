@@ -9,6 +9,13 @@ import { join } from 'path';
 import { getPackageVersion } from './utils/getPackageJson.js';
 import { PLUGINS_DIR } from './constants.js';
 
+// if node version < 16 , give a warning
+if (Number(process.versions.node.split('.')[0]) < 16) {
+  console.log(chalk.red('⚠️  Node version must be >= 16.0.0'));
+  console.log(chalk.red('⚠️  Please upgrade node version'));
+  process.exit(1);
+}
+
 const version = await getPackageVersion();
 
 const argv = cli({
