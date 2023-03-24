@@ -43,7 +43,7 @@ export async function run(pluginConfig: IPluginConfig, argv: {
     // hack OPENAI_API_KEY  0.3 show warning for free key
     Math.random() < 0.3 &&
       console.log(chalk.yellow(`
-⚠️  OPENAI_API_KEY not found, using free key(not stable)
+⚠️ using free key(not stable), because OPENAI_API_KEY not found,
 please set your own key by:
 gptcli config user.OPENAI_API_KEY sk-xxx
 `))
