@@ -7,8 +7,8 @@ import chalk from 'chalk';
 
 
 export type IMessages = Array<{
-	content: string;
-	role: 'user' | 'assistant';
+  content: string;
+  role: 'user' | 'assistant';
 }>
 
 export class CreateChatCompletion extends Base {
@@ -21,7 +21,7 @@ export class CreateChatCompletion extends Base {
       return;
     }
 
-    !this.silent && startLoading('AI is thinking ...');
+    startLoading('AI is thinking ...');
 
     const { messages } = this.with as { messages: IMessages };
     const messagesWithEnv = messages.map((item) => {

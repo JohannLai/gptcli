@@ -13,8 +13,10 @@ help: |
 env:
   LOCALE: "en"
   style: "cz"
+  EXCLUDE: |
+    ':(exclude)package-lock.json' ':(exclude)pnpm-lock.yaml' ':(exclude)*.lock' ':(exclude)go.sum'
 steps:
-  - name: "get diff"
+  - name: "get diff cached"
     silent: true
     script: |
       echo "::set-output name=diff::$(git diff --cached | tr '\n' ' ')"
