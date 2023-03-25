@@ -39,7 +39,9 @@ const argv = cli({
       '👉 gpt config [pluginName/user.key] [value]',
     ],
     examples: [
-      '🕹️  gpt gitmoji "fix a bug"',
+      '🕹️  gpt commit',
+      '🕹️  gpt command',
+      '🕹️  gpt chat',
       '🕹️  gpt config user.OPENAI_API_KEY sk-xxx'
     ],
   },
