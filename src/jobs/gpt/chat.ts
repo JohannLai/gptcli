@@ -25,7 +25,13 @@ export class Chat extends Base {
     const welcomeMessage = chalk.green(`${AIEmoji}: Hi, I am ChatGpt, I can answer your questions. Ask me anything, or say "bye" to exit.`);
     console.log(welcomeMessage)
 
+    // output messages
     const messages: string[] = [];
+
+    const chatMessages: {
+      content: string;
+      role: 'user' | 'assistant';
+    }[] = [];
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
@@ -41,17 +47,16 @@ export class Chat extends Base {
       }
 
       messages.push("");
+      chatMessages.push({
+        content: question,
+        role: 'user',
+      });
 
       startLoading('AI is thinking ...');
       const apiKey = this.pipeline.env.OPENAI_API_KEY || getFreeOpenaiKey();
-      await createChatCompletion({
+      const currentMessage = await createChatCompletion({
         apiKey,
-        messages: [
-          {
-            content: question,
-            role: 'user',
-          },
-        ],
+        messages: chatMessages,
         onMessage: (message) => {
           if (!message) {
             return;
@@ -60,6 +65,13 @@ export class Chat extends Base {
           logUpdate(chalk.green(`${AIEmoji}: ${message}`));
         }
       });
+
+      if (!currentMessage) {
+        chatMessages.push({
+          content: currentMessage,
+          role: 'assistant',
+        });
+      }
 
       logUpdate.done()
     }
