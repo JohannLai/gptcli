@@ -23,7 +23,7 @@ export async function createChatCompletion(options: { [x: string]: any; messages
   });
 
   if (!response?.ok) {
-    console.log(chalk.red(`Error: request openai error, ${response.status} ,${response.statusText}`))
+    console.log(chalk.red(`Error: request openai error, ${response.statusText}(${response.status}), May be more than the longest tokens`))
     process.exit(1)
   }
 
