@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import { Base, IConfigBase } from '../base.js';
 import { replaceEnvVariables } from '../../utils/replaceEnvVariables.js';
 
-export class Confirm extends Base {
+export class Input extends Base {
   constructor(args: IConfigBase) {
     super(args);
   }
@@ -23,9 +23,8 @@ export class Confirm extends Base {
       });
 
     const { data } = await inquirer.prompt({
-      type: 'confirm',
+      type: 'input',
       name: 'data',
-      default: true,
       message: messageWithEnv,
     });
 

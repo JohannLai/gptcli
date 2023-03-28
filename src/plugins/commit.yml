@@ -78,3 +78,38 @@ steps:
     if: $ANSWER == true
     script: |
       $COMMAND
+      exit 0
+  # if the result is not good, ask user to input some suggestions to regenerate the commit message
+  - name: "ask if user want to regenerate the commit message"
+    if: $ANSWER == false
+    uses: "gpt:input"
+    with:
+      message: "Please input some suggestions to regenerate the commit message: "
+    export:
+      answer: SUGGESTIONS
+  - name: "regenerate the commit message"
+    if: $ANSWER == false
+    uses: "gpt:createChatCompletion"
+    with:
+      messages:
+        - role: "user"
+          content: |
+            This is the second time running, \n
+            In our last conversation, you generated a commit message. Now, you need to optimize it based on my commit messages. \n
+            and the previous generate commit message is: $COMMAND, \n
+            and the suggestions is: ${SUGGESTIONS}", \n
+            the new commit message must be base on the previous generate message and cannot change the style of cz or gitmoji, \n
+            just small change to make it better.
+    export:
+      response_content: COMMAND
+  - name: "ask if user want to execute the command"
+    uses: "gpt:confirm"
+    with:
+      message: "Would you like to use this commit message ⬆️ ? "
+      default: true
+    export:
+      answer: ANSWER
+  - name: "execute the command"
+    if: $ANSWER == true
+    script: |
+      $COMMAND
