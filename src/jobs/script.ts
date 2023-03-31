@@ -22,6 +22,11 @@ export class Script extends Base {
       process.exit(1);
     });
 
+    // exit 78 means that the script was cancelled
+    if (result.code === 78) {
+      process.exit(78);
+    }
+
     if (result.code !== 0) {
       throw new Error(result.stderr);
     }

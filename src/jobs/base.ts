@@ -70,7 +70,9 @@ export abstract class Base {
       });
 
       process.on('close', (code) => {
-        console.log('close', code);
+        if (code == 78) {
+          resolve({ code: 78, stdout, stderr });
+        }
         if (code !== 0) {
           !this.silent && console.log(chalk.red(stderr));
           reject(stderr);
