@@ -79,6 +79,7 @@ steps:
     script: |
       $COMMAND
       exit 0
+      echo "test the command"
   # if the result is not good, ask user to input some suggestions to regenerate the commit message
   - name: "ask if user want to regenerate the commit message"
     if: $ANSWER == false
