@@ -71,11 +71,15 @@ export abstract class Base {
 
       process.on('close', (code) => {
         if (code == 78) {
+          !this.silent && logUpdate(stdout)
           resolve({ code: 78, stdout, stderr });
+          return;
         }
+
         if (code !== 0) {
           !this.silent && console.log(chalk.red(stderr));
           reject(stderr);
+          return;
         }
 
         !this.silent && logUpdate(stdout)
