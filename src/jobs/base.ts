@@ -51,8 +51,6 @@ export abstract class Base {
       ...this.pipeline.env,
     });
 
-    console.log(chalk.cyan(scriptWithEnv));
-
     return new Promise((resolve, reject) => {
       const process = spawn(scriptWithEnv, {
         shell: true,
@@ -72,6 +70,7 @@ export abstract class Base {
       });
 
       process.on('close', (code) => {
+        console.log('close', code);
         if (code !== 0) {
           !this.silent && console.log(chalk.red(stderr));
           reject(stderr);
