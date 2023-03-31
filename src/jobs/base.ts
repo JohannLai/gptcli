@@ -4,22 +4,22 @@ import logUpdate from 'log-update';
 import { replaceEnvVariables } from '../utils/replaceEnvVariables.js';
 
 export interface IConfigBase {
-	name: string;
-	with?: {
-		[key: string]: any;
-	}
-	if?: string;
-	script?: string | string[];
-	export?: {
-		[key: string]: any;
-	}
-	uses?: string;
-	silent?: boolean;
-	pipeline: {
-		env: {
-			[key: string]: any;
-		}
-	}
+  name: string;
+  with?: {
+    [key: string]: any;
+  }
+  if?: string;
+  script?: string | string[];
+  export?: {
+    [key: string]: any;
+  }
+  uses?: string;
+  silent?: boolean;
+  pipeline: {
+    env: {
+      [key: string]: any;
+    }
+  }
 }
 
 export abstract class Base {
@@ -50,6 +50,8 @@ export abstract class Base {
       ...process.env,
       ...this.pipeline.env,
     });
+
+    console.log(chalk.cyan(scriptWithEnv));
 
     return new Promise((resolve, reject) => {
       const process = spawn(scriptWithEnv, {
