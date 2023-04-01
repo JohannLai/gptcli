@@ -2,6 +2,7 @@
   <div>
     <img src=".github/icon.png" alt="GPTCLI" width="200"/>
     <h1 align="center">GPT CLI</h1>
+    <a href="https://www.producthunt.com/posts/gptcli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-gptcli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=386821&theme=light" alt="gptcli - All&#0032;in&#0032;one&#0032;ChatGPT&#0032;CLI&#0032;for&#0032;AI&#0032;Commit&#0044;&#0032;AI&#0032;Command&#0044;&#0032;etc | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
   </div>
 	<p>All in one ChatGPT CLI, build your own AI cli tools just like GitHub Actions workflow</p>
 	<p>With GPT CLI, you can customize your CLI tools to suit your needs and make your work more efficient.</p>
