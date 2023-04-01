@@ -62,6 +62,10 @@ if (argv._[0] == 'alias') {
   console.log(`alias 'commit?'='gptcli commit'`);
   // chat? for gptcli chat
   console.log(`alias 'chat?'='gptcli chat'`);
+  // gitmoji? for gptcli gitmoji
+  console.log(`alias 'gitmoji?'='gptcli gitmoji'`);
+  // t? for gptcli translate
+  console.log(`alias 't?'='gptcli translate'`);
   process.exit(0);
 }
 
