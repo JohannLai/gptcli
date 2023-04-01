@@ -63,10 +63,21 @@ eval "$(gptcli alias)"
 NOW, you can use `??` to start AI Command
 
 ```bash
-?? "show all js files in the current folder"
+$ ?? "show all js files in the current folder"
 > AI is thinking...
 # then you will see the result
 > ls -al | grep .js
+
+# chat?
+$ chat?
+👽: Hi, I am ChatGpt, I can answer your questions. Ask me anything, or say "bye" to exit.
+? 🫣 how git diff --cached add EXCLUDE
+
+# translate ： t? "hello world"
+$ t? "hello world"
+> 你好，世界
+
+# for more plugins, please check the plugins section
 ```
 
 ## 🧰 Built-in Plugins
