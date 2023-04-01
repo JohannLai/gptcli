@@ -34,21 +34,36 @@ const argv = cli({
     version,
     description: '✨ ALL IN ONE CLI for ChatGPT command line tool',
     usage: [
-      '👉 gpt <plugin> [optional spread...]',
-      '👉 gpt list',
-      '👉 gpt config [pluginName/user.key] [value]',
+      '👉 gptcli <plugin> [optional spread...]',
+      '👉 gptcli list',
+      '👉 gptcli config [pluginName/user.key] [value]',
     ],
     examples: [
-      '🕹️  gpt commit',
-      '🕹️  gpt command',
-      '🕹️  gpt chat',
-      '🕹️  gpt config user.OPENAI_API_KEY sk-xxx'
+      '🕹️  gptcli commit',
+      '🕹️  gptcli command',
+      '🕹️  gptcli chat',
+      '🕹️  gptcli config user.OPENAI_API_KEY sk-xxx',
+      '',
+      '🚀 we recommend to use alias, eval "$(gptcli alias)"',
     ],
   },
 });
 
 
 const { plugin, optionalSpread } = argv._;
+
+// alias
+if (argv._[0] == 'alias') {
+  // user can use ?? to run gptcli command
+  // eval "$(gptcli alias)" to set alias
+  // ?? for gptcli command
+  console.log(`alias '??'='gptcli command'`);
+  // commit? for gptcli commit
+  console.log(`alias 'commit?'='gptcli commit'`);
+  // chat? for gptcli chat
+  console.log(`alias 'chat?'='gptcli chat'`);
+  process.exit(0);
+}
 
 // List all plugins
 if (argv._[0] == 'list') {
@@ -69,7 +84,6 @@ if (argv._[0] == 'list') {
 
   process.exit(0);
 }
-
 
 // Config plugin
 // TODO: can be refactored to a plugin, use plugin/gpt/config.yml
