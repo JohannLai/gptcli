@@ -19,7 +19,7 @@ steps:
   - name: "get diff cached"
     silent: true
     script: |
-      echo "::set-output name=diff::$(git diff --cached | tr '\n' ' ')"
+      echo "::set-output name=diff::$(git diff --cached -- . $EXCLUDE | tr '\n' ' ')"
     export:
       diff: diff
   - name: "ask ai to output commit messagecreateChatCompletion"
