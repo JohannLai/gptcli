@@ -142,6 +142,7 @@
     "read-pkg-up": "^9.1.0",
     "readable-stream": "^3.6.2",
     "undici": "^5.21.0",
+    "update-notifier": "^6.0.2",
     "web-streams-polyfill": "^3.2.1"
   }
 }

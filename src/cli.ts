@@ -6,8 +6,9 @@ import { getPluginConfig } from './utils/getPluginConfig.js';
 import { getConfigFromGptrc, setConfigToGptrc } from './utils/gptrc.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
-import { getPackageVersion } from './utils/getPackageJson.js';
+import { getPackageVersion, getPackageJson } from './utils/getPackageJson.js';
 import { PLUGINS_DIR } from './constants.js';
+import updateNotifier from 'update-notifier';
 
 // if node version < 16 , give a warning
 if (Number(process.versions.node.split('.')[0]) < 16) {
@@ -15,6 +16,16 @@ if (Number(process.versions.node.split('.')[0]) < 16) {
   console.log(chalk.red('⚠️  Please upgrade node version'));
   process.exit(1);
 }
+
+// update notifier
+const pkg = await getPackageJson();
+const notifier = updateNotifier({
+  pkg,
+  // every day check
+  updateCheckInterval: 1000 * 60 * 60 * 24,
+});
+
+notifier.notify();
 
 const version = await getPackageVersion();
 
