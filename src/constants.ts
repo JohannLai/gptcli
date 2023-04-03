@@ -8,4 +8,4 @@ export const CONFIG_FILE_PATH = path.join(CONFIG_DIR, '.gptrc');
 // installed plugins dir
 export const PLUGINS_DIR = path.join(CONFIG_DIR, 'plugins');
 
-export const OPENAI_BASE_URL = 'https://api.openai.com'
+export const OPENAI_DOMAIN = 'https://api.gptboxapp.com'

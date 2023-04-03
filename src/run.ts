@@ -3,7 +3,6 @@ import { Renderers } from "cleye";
 import { IConfigBase } from "./jobs/base.js";
 import { IPluginConfig } from "./utils/getPluginConfig.js";
 import { getScopesConfig } from './utils/gptrc.js';
-import { getFreeOpenaiKey } from "./utils/openaiAPI/getFreeOpenaiKey.js";
 
 export interface IPipeline {
   env: {
@@ -47,7 +46,6 @@ export async function run(pluginConfig: IPluginConfig, argv: {
 please set your own key by:
 gptcli config user.OPENAI_API_KEY sk-xxx
 `))
-    pipeline.env.OPENAI_API_KEY = getFreeOpenaiKey()
   }
 
   Object.keys(unknownFlags).forEach((flag) => {

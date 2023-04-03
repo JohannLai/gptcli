@@ -1,15 +1,16 @@
 import chalk from "chalk";
 import { fetch } from 'undici'
-import { OPENAI_BASE_URL } from "../../constants.js";
+import { OPENAI_DOMAIN } from "../../constants.js";
 import { createParser } from 'eventsource-parser'
 
 export async function createChatCompletion(options: { [x: string]: any; messages?: { content: string; role: "user" | "assistant"; }[]; onMessage: (data: string) => void }) {
   const { apiKey, onMessage, ...fetchOptions } = options;
+  const authKey = apiKey ? `Bearer ${apiKey}` : '';
 
-  const response = await fetch(`${OPENAI_BASE_URL}/v1/chat/completions`, {
+  const response = await fetch(`${OPENAI_DOMAIN}/v1/chat/completions`, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: authKey,
     },
     method: 'POST',
     body: JSON.stringify({

@@ -13,26 +13,26 @@ import { Base, IConfigBase } from '../base.js';
  * }
  */
 export class CopyToClipboard extends Base {
-	constructor(args: IConfigBase) {
-		super(args);
-	}
+  constructor(args: IConfigBase) {
+    super(args);
+  }
 
-	public async run() {
-		if (!await super.run()) {
-			return;
-		}
+  public async run() {
+    if (!await super.run()) {
+      return;
+    }
 
 
-		const { text } = this.with as {
-			text: string,
-		};
+    const { text } = this.with as {
+      text: string,
+    };
 
-		const textWithEnv = replaceEnvVariables(
-			text, {
-			...process.env,
-			...this.pipeline.env,
-		});
+    const textWithEnv = replaceEnvVariables(
+      text, {
+        ...process.env,
+        ...this.pipeline.env,
+      });
 
-		clipboardy.writeSync(textWithEnv);
-	}
+    clipboardy.writeSync(textWithEnv);
+  }
 }

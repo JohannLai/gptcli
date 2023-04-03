@@ -4,7 +4,6 @@ import { Base, IConfigBase } from '../base.js';
 import { createChatCompletion } from '../../utils/openaiAPI/createChatCompletion.js';
 import { startLoading, stopLoading } from '../../utils/loading.js';
 import logUpdate from 'log-update';
-import { getFreeOpenaiKey } from '../../utils/openaiAPI/getFreeOpenaiKey.js';
 
 /**
  * chat with gpt
@@ -53,7 +52,7 @@ export class Chat extends Base {
       });
 
       startLoading('AI is thinking ...');
-      const apiKey = this.pipeline.env.OPENAI_API_KEY || getFreeOpenaiKey();
+      const apiKey = this.pipeline.env.OPENAI_API_KEY;
       const currentMessage = await createChatCompletion({
         apiKey,
         messages: chatMessages,
