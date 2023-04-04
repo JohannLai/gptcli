@@ -57,6 +57,9 @@ gptcli config user.OPENAI_API_KEY sk-xxx
     process.env[`params_${index}`] = value;
   })
 
+  // params_all is all params, join with space
+  process.env.params_all = optionalSpread.join(' ');
+
   // run steps
   const { steps } = pluginConfig;
   for (const step of steps) {

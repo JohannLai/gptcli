@@ -23,7 +23,7 @@ steps:
         - role: "assistant"
           content: "ls *.txt"
         - role: "user"
-          content: $params_0
+          content: $params_all
     export:
       response_content: COMMAND
   - name: "ask if user want to execute the command"
