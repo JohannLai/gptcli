@@ -64,7 +64,7 @@ const argv = cli({
 const { plugin, optionalSpread } = argv._;
 
 // alias
-if (argv._[0] == 'alias') {
+if (argv._[0] == 'alias' || plugin == 'alias') {
   // user can use ?? to run gptcli command
   // eval "$(gptcli alias)" to set alias
   // ?? for gptcli command
