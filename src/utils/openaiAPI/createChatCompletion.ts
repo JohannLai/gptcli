@@ -14,7 +14,7 @@ export async function createChatCompletion(options: { [x: string]: any; messages
     },
     method: 'POST',
     body: JSON.stringify({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-16k",
       ...fetchOptions,
       stream: true,
     }),
