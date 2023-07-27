@@ -76,7 +76,7 @@ steps:
   - name: "ask if user want to execute the command"
     uses: "gpt:confirm"
     with:
-      message: "Would you like to use this commit message ⬆️ ? "
+      message: "Would you like to use this commit message(n can change another) ⬆️ ? "
       default: true
     export:
       answer: ANSWER
@@ -85,7 +85,8 @@ steps:
     script:
       - $COMMAND
       - exit 78
-  # if the result is not good, ask user to input some suggestions to regenerate the commit message
+  # if the result is not good
+  # ask user to input some suggestions to regenerate the commit message
   - name: "ask if user want to regenerate the commit message"
     if: $ANSWER == false
     uses: "gpt:input"
