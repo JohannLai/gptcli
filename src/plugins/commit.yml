@@ -16,10 +16,15 @@ env:
   EXCLUDE: |
     ':(exclude)package-lock.json' ':(exclude)pnpm-lock.yaml' ':(exclude)*.lock' ':(exclude)go.sum'
 steps:
+  - name: "get diff file name only list"
+    script: |
+      echo "::set-output name=diffFiles::$(git diff --cached --name-only --diff-algorithm=minimal -- . $EXCLUDE | tr '\n' ' ')"
+    export:
+      diffFiles: diffFiles
   - name: "get diff cached"
     silent: true
     script: |
-      echo "::set-output name=diff::$(git diff --cached -- . $EXCLUDE | tr '\n' ' ')"
+      echo "::set-output name=diff::$(git diff --cached --diff-algorithm=minimal -- . $EXCLUDE | tr '\n' ' ')"
     export:
       diff: diff
   - name: "ask ai to output commit messagecreateChatCompletion"
@@ -28,7 +33,8 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "Write an insightful but concise Git commit message in a complete sentence in present tense for the following diff without prefacing it, not more than 100 characters, the response must be in the language ${LOCALE}:\n the diff data is: ${diff} \n "
+          content: |
+            "Generate a concise git commit message written in present tense for the following code diff with the given specifications below: the response must be in the language ${LOCALE}:\n Diff files: ${diffFiles} \n Diff data is: ${diff} \n"
     export:
       response_content: COMMAND
   - name: if style is gitmoji
@@ -38,7 +44,7 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "You are a Gitmoji command-line tool conversion program that converts commit messages to Gitmoji format. The official website is https://gitmoji.dev/. In the following conversation, I input a commit message and you convert it to Gitmoji format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation."
+          content: "You are a Gitmoji command-line tool conversion program that converts commit messages to Gitmoji format. The official website is https://gitmoji.dev/. In the following conversation, I input a commit message and you convert it to Gitmoji format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation. the commit message is:"
         - role: "assistant"
           content: "ok"
         - role: "user"
@@ -56,7 +62,7 @@ steps:
     with:
       messages:
         - role: "user"
-          content: "You are a commitizen command-line tool conversion program that converts commit messages to cz format and commitizen friendly, The official website is https://commitizen.github.io/cz-cli. In the following conversation, I input a commit message and you convert it to commitizen format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation."
+          content: "You are a commitizen command-line tool conversion program that converts commit messages to cz format and commitizen friendly, The official website is https://commitizen.github.io/cz-cli. In the following conversation, I input a commit message and you convert it to commitizen format and add it to git commit -m. You only need to output the translated instruction directly, without any explanation. the commit message is:"
         - role: "assistant"
           content: "ok"
         - role: "user"
