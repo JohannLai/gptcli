@@ -23,7 +23,7 @@ steps:
     if: |
       "$flag_to" != "undefined"
     script: |
-      echo "::set-output name=LANG::$flag_to"
+      echo "LANG=$flag_to" >> $GITHUB_OUTPUT
     export:
       LANG: LANG
   - name: "ask ai to translate"
